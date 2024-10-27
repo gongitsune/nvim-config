@@ -25,5 +25,15 @@
         "**/.DS_Store": true,
         "**/Thumbs.db": true,
         "neovim": true
+    },
+    "[lua]": {
+        "editor.quickSuggestions": {
+            "comments": "inline",
+            "other": "on",
+            "strings": "on"
+        },
+        "editor.semanticHighlighting.enabled": true,
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "sumneko.lua"
     }
 }
