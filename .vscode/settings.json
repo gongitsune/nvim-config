@@ -4,10 +4,14 @@
         "?.lua",
         "?/init.lua",
         "neovim/runtime/lua/vim",
-        "neovim/runtime/lua/vim/?.lua"
+        "neovim/runtime/lua/vim/?.lua",
+        // Neovim plugins
+        "~/.local/share/nvim/lazy/oil.nvim/lua/?.lua",
     ],
     "Lua.workspace.library": [
         "neovim/runtime/lua",
+        // Neovim plugins
+        "~/.local/share/nvim/lazy/oil.nvim/lua"
     ],
     "[json]": {
         "editor.quickSuggestions": {

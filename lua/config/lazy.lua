@@ -34,12 +34,10 @@ require("lazy").setup({
     spec = {
         { import = "plugins" }
     },
-    -- install = {colorscheme = }
     defaults = { lazy = true },
     performance = {
         rtp = {
             disabled_plugins = { "tohtml", "gzip", "zipPlugin", "netrwPlugin", "tarPlugin" },
         },
-    },
-    checker = { enabled = true }
+    }
 })

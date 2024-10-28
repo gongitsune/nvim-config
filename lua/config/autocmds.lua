@@ -36,3 +36,44 @@ autocmd("TermOpen", {
         vim.opt_local.signcolumn = "no"
     end,
 })
+
+autocmd("BufWinEnter", {
+    desc = "Make q close help, man, quickfix, dap floats",
+    group = augroup("q_close_windows", { clear = true }),
+    callback = function(args)
+        local buftype = vim.api.nvim_get_option_value("buftype", { buf = args.buf })
+        if vim.tbl_contains({ "help", "nofile", "quickfix" }, buftype) and vim.fn.maparg("q", "n") == "" then
+            vim.keymap.set("n", "q", "<cmd>close<cr>", {
+                desc = "Close window",
+                buffer = args.buf,
+                silent = true,
+                nowait = true,
+            })
+        end
+    end,
+})
+
+autocmd("TextYankPost", {
+    desc = "Highlight yanked text",
+    group = augroup("highlightyank", { clear = true }),
+    pattern = "*",
+    callback = function() vim.highlight.on_yank() end,
+})
+
+autocmd("FileType", {
+    desc = "Unlist quickfist buffers",
+    group = augroup("unlist_quickfist", { clear = true }),
+    pattern = "qf",
+    callback = function() vim.opt_local.buflisted = false end,
+})
+
+autocmd("FileType", {
+    desc = "configure editorconfig after filetype detection to override `ftplugin`s",
+    group = augroup("editorconfig_filetype", { clear = true }),
+    callback = function(args)
+        if vim.F.if_nil(vim.b.editorconfig, vim.g.editorconfig, true) then
+            local editorconfig_avail, editorconfig = pcall(require, "editorconfig")
+            if editorconfig_avail then editorconfig.config(args.buf) end
+        end
+    end,
+})

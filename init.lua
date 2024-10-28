@@ -14,3 +14,6 @@ for _, source in ipairs({
         )
     end
 end
+
+-- apply colorscheme
+vim.cmd.colorscheme("catppuccin")
