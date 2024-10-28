@@ -33,4 +33,35 @@ function M.load_plugin_with_func(plugin, module, func_names)
     end
 end
 
+--- Call function if a condition is met
+---@param func function The function to run
+---@param condition boolean # Whether to run the function or not
+---@return any|nil result # the result of the function running or nil
+function M.conditional_func(func, condition, ...)
+    -- if the condition is true, evaluate the function with the rest of the parameters and return the result
+    if condition and type(func) == "function" then return func(...) end
+end
+
+--- Check if a plugin is defined in lazy. Useful with lazy loading when a plugin is not necessarily loaded yet
+---@param plugin string The plugin to search for
+---@return boolean available # Whether the plugin is available
+function M.is_available(plugin)
+    local lazy_config_avail, lazy_config = pcall(require, "lazy.core.config")
+    return lazy_config_avail and lazy_config.spec.plugins[plugin] ~= nil
+end
+
+--- Get an icon from the AstroNvim internal icons if it is available and return it
+---@param kind string The kind of icon in astronvim.icons to retrieve
+---@param padding? integer Padding to add to the end of the icon
+---@param no_fallback? boolean Whether or not to disable fallback to text icon
+---@return string icon
+function M.get_icon(kind, padding, no_fallback)
+    if not vim.g.icons_enabled and no_fallback then return "" end
+    if not M["icons"] then
+        M.icons = require("utils.nerd_icons")
+    end
+    local icon = M["icons"] and M["icons"][kind]
+    return icon and icon .. string.rep(" ", padding or 0) or ""
+end
+
 return M
