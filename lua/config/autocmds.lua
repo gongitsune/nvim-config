@@ -42,7 +42,7 @@ autocmd("BufWinEnter", {
     group = augroup("q_close_windows", { clear = true }),
     callback = function(args)
         local buftype = vim.api.nvim_get_option_value("buftype", { buf = args.buf })
-        local target_buftypes = { "help", "nofile", "quickfix", "terminal" }
+        local target_buftypes = { "help", "nofile", "quickfix" }
         if
             vim.tbl_contains(target_buftypes, buftype)
             and vim.fn.maparg("q", "n") == ""

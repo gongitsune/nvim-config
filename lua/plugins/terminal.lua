@@ -25,6 +25,11 @@ return {
                     end
                 end
             end,
+            ---@param t Terminal
+            on_open = function(t)
+                vim.cmd("startinsert!")
+                vim.api.nvim_buf_set_keymap(t.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
+            end,
             shading_factor = 2,
             direction = "float",
             float_opts = { border = "rounded" },
