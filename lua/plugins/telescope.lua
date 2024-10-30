@@ -6,12 +6,12 @@ return {
     cmd = "Telescope",
     opts = function()
         local actions = require "telescope.actions"
-        local get_icon = require("utils").get_icon
+        local icons = require "utils.nerd_icons"
         return {
             defaults = {
                 git_worktrees = vim.g.git_worktrees,
-                prompt_prefix = get_icon("Selected", 1),
-                selection_caret = get_icon("Selected", 1),
+                prompt_prefix = icons.Selected .. " ",
+                selection_caret = icons.Selected .. " ",
                 path_display = { "truncate" },
                 sorting_strategy = "ascending",
                 layout_config = {

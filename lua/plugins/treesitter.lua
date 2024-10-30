@@ -3,7 +3,7 @@ return {
     dependencies = {
         "nvim-treesitter/nvim-treesitter-textobjects",
     },
-    event = { "BufReadPost", "BufNewFile", "BufWritePost" },
+    event = "User CustomFIle",
     cmd = {
         "TSBufDisable",
         "TSBufEnable",

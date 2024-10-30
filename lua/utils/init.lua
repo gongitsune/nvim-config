@@ -36,7 +36,7 @@ end
 --- Call function if a condition is met
 ---@param func function The function to run
 ---@param condition boolean # Whether to run the function or not
----@return any|nil result # the result of the function running or nil
+---@RETURN ANY|NIL RESULT # THE RESULT OF THE FUNCTION RUNNING OR NIL
 function M.conditional_func(func, condition, ...)
     -- if the condition is true, evaluate the function with the rest of the parameters and return the result
     if condition and type(func) == "function" then return func(...) end
@@ -50,18 +50,51 @@ function M.is_available(plugin)
     return lazy_config_avail and lazy_config.spec.plugins[plugin] ~= nil
 end
 
---- Get an icon from the AstroNvim internal icons if it is available and return it
----@param kind string The kind of icon in astronvim.icons to retrieve
----@param padding? integer Padding to add to the end of the icon
----@param no_fallback? boolean Whether or not to disable fallback to text icon
----@return string icon
-function M.get_icon(kind, padding, no_fallback)
-    if not vim.g.icons_enabled and no_fallback then return "" end
-    if not M["icons"] then
-        M.icons = require("utils.nerd_icons")
+--- Trigger an Custom user event
+---@param event string The event name to be appended to Custom
+---@param delay? boolean Whether or not to delay the event asynchronously (Default: true)
+function M.event(event, delay)
+    local emit_event = function() vim.api.nvim_exec_autocmds("User", { pattern = "Custom" .. event, modeline = false }) end
+    if delay == false then
+        emit_event()
+    else
+        vim.schedule(emit_event)
     end
-    local icon = M["icons"] and M["icons"][kind]
-    return icon and icon .. string.rep(" ", padding or 0) or ""
+end
+
+--- Run a shell command and capture the output and if the command succeeded or failed
+---@param cmd string|string[] The terminal command to execute
+---@param show_error? boolean Whether or not to show an unsuccessful command as an error to the user
+---@return string|nil # The result of a successfully executed command or nil
+function M.cmd(cmd, show_error)
+    if type(cmd) == "string" then cmd = { cmd } end
+    if vim.fn.has "win32" == 1 then cmd = vim.list_extend({ "cmd.exe", "/C" }, cmd) end
+    local result = vim.fn.system(cmd)
+    local success = vim.api.nvim_get_vvar "shell_error" == 0
+    if not success and (show_error == nil or show_error) then
+        vim.api.nvim_err_writeln(("Error running command %s\nError message:\n%s"):format(table.concat(cmd, " "), result))
+    end
+    return success and result:gsub("[\27\155][][()#;?%d]*[A-PRZcf-ntqry=><~]", "") or nil
+end
+
+--- Toggle a user terminal if it exists, if not then create a new one and save it
+---@param opts string|table A terminal command string or a table of options for Terminal:new() (Check toggleterm.nvim documentation for table format)
+function M.toggle_term_cmd(opts)
+    local terms = {}
+
+    -- if a command string is provided, create a basic table for Terminal:new() options
+    if type(opts) == "string" then opts = { cmd = opts } end
+    opts = M.extend_tbl({ hidden = true }, opts)
+    local num = vim.v.count > 0 and vim.v.count or 1
+    -- if terminal doesn't exist yet, create it
+    if not terms[opts.cmd] then terms[opts.cmd] = {} end
+    if not terms[opts.cmd][num] then
+        if not opts.count then opts.count = vim.tbl_count(terms) * 100 + num end
+        if not opts.on_exit then opts.on_exit = function() terms[opts.cmd][num] = nil end end
+        terms[opts.cmd][num] = require("toggleterm.terminal").Terminal:new(opts)
+    end
+    -- toggle the terminal
+    terms[opts.cmd][num]:toggle()
 end
 
 return M

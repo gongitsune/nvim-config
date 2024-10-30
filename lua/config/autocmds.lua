@@ -42,7 +42,11 @@ autocmd("BufWinEnter", {
     group = augroup("q_close_windows", { clear = true }),
     callback = function(args)
         local buftype = vim.api.nvim_get_option_value("buftype", { buf = args.buf })
-        if vim.tbl_contains({ "help", "nofile", "quickfix" }, buftype) and vim.fn.maparg("q", "n") == "" then
+        local target_buftypes = { "help", "nofile", "quickfix", "terminal" }
+        if
+            vim.tbl_contains(target_buftypes, buftype)
+            and vim.fn.maparg("q", "n") == ""
+        then
             vim.keymap.set("n", "q", "<cmd>close<cr>", {
                 desc = "Close window",
                 buffer = args.buf,
@@ -75,5 +79,45 @@ autocmd("FileType", {
             local editorconfig_avail, editorconfig = pcall(require, "editorconfig")
             if editorconfig_avail then editorconfig.config(args.buf) end
         end
+    end,
+})
+
+autocmd({ "BufReadPost", "BufNewFile", "BufWritePost" }, {
+    desc = "AstroNvim user events for file detection (AstroFile and AstroGitFile)",
+    group = augroup("file_user_events", { clear = true }),
+    callback = function(args)
+        local utils = require("utils")
+        local emit_event = utils.event
+
+        local current_file = vim.api.nvim_buf_get_name(args.buf)
+        if not (current_file == "" or vim.api.nvim_get_option_value("buftype", { buf = args.buf }) == "nofile") then
+            emit_event "File"
+            if
+                require("utils.git").file_worktree()
+                or utils.cmd({ "git", "-C", vim.fn.fnamemodify(current_file, ":p:h"), "rev-parse" }, false)
+            then
+                emit_event "GitFile"
+                vim.api.nvim_del_augroup_by_name "file_user_events"
+            end
+            vim.schedule(function() vim.api.nvim_exec_autocmds("CursorMoved", { modeline = false }) end)
+        end
+    end,
+})
+
+-- Resession auto commands
+autocmd("VimEnter", {
+    callback = function()
+        -- Only load the session if nvim was started with no args
+        if vim.fn.argc(-1) == 0 then
+            -- Save these to a different directory, so our manual sessions don't get polluted
+            require("resession").load(vim.fn.getcwd(), { dir = "dirsession", silence_errors = true })
+        end
+    end,
+    nested = true,
+})
+
+autocmd("VimLeavePre", {
+    callback = function()
+        require("resession").save(vim.fn.getcwd(), { dir = "dirsession", notify = false })
     end,
 })

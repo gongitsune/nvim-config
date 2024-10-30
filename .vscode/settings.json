@@ -7,11 +7,15 @@
         "neovim/runtime/lua/vim/?.lua",
         // Neovim plugins
         "~/.local/share/nvim/lazy/oil.nvim/lua/?.lua",
+        "~/.local/share/nvim/lazy/which-key.nvim/lua/?.lua",
+        "~/.local/share/nvim/lazy/toggleterm.nvim/lua/?.lua",
     ],
     "Lua.workspace.library": [
         "neovim/runtime/lua",
         // Neovim plugins
-        "~/.local/share/nvim/lazy/oil.nvim/lua"
+        "~/.local/share/nvim/lazy/oil.nvim/lua",
+        "~/.local/share/nvim/lazy/which-key.nvim/lua",
+        "~/.local/share/nvim/lazy/toggleterm.nvim/lua",
     ],
     "[json]": {
         "editor.quickSuggestions": {
