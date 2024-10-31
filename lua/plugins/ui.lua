@@ -89,16 +89,16 @@ return {
         override = {
           ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
           ["vim.lsp.util.stylize_markdown"] = true,
-          ["cmp.entry.get_documentation"] = true,           -- requires hrsh7th/nvim-cmp
+          ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
         },
       },
       -- you can enable a preset for easier configuration
       presets = {
-        bottom_search = true,                 -- use a classic bottom cmdline for search
-        command_palette = true,               -- position the cmdline and popupmenu together
-        long_message_to_split = true,         -- long messages will be sent to a split
-        inc_rename = true,                    -- enables an input dialog for inc-rename.nvim
-        lsp_doc_border = true,                -- add a border to hover docs and signature help
+        bottom_search = true,         -- use a classic bottom cmdline for search
+        command_palette = true,       -- position the cmdline and popupmenu together
+        long_message_to_split = true, -- long messages will be sent to a split
+        inc_rename = true,            -- enables an input dialog for inc-rename.nvim
+        lsp_doc_border = true,        -- add a border to hover docs and signature help
       },
       messages = {
         view = "mini"
@@ -107,6 +107,33 @@ return {
     dependencies = {
       "MunifTanjim/nui.nvim",
       "rcarriga/nvim-notify",
+    }
+  },
+  {
+    'kosayoda/nvim-lightbulb',
+    event = "User CustomFile",
+    opts = {
+      autocmd = { enabled = true },
+      sign = { enabled = false },
+      float = { enabled = true },
+    }
+  },
+  {
+    "gongitsune/actions-preview.nvim",
+    opts = {
+      telescope = {
+        sorting_strategy = "ascending",
+        layout_strategy = "vertical",
+        layout_config = {
+          width = 0.8,
+          height = 0.9,
+          prompt_position = "top",
+          preview_cutoff = 20,
+          preview_height = function(_, _, max_lines)
+            return max_lines - 15
+          end,
+        },
+      },
     }
   }
 }

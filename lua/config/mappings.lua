@@ -375,7 +375,7 @@ require("utils.lsp").on_attach(function(client, bufnr)
       lsp_method_map(
         "textDocument/codeAction",
         "<leader>la",
-        function() vim.lsp.buf.code_action() end,
+        function() require("actions-preview").code_actions() end,
         "LSP code action"
       ),
       lsp_method_map(

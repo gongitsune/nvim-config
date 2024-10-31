@@ -3,8 +3,8 @@
     "Lua.runtime.path": [
         "?.lua",
         "?/init.lua",
-        "neovim/runtime/lua/vim",
-        "neovim/runtime/lua/vim/?.lua",
+        "/usr/share/nvim/runtime/lua/vim",
+        "/usr/share/nvim/runtime/lua/vim/?.lua",
         // Neovim plugins
         "~/.local/share/nvim/lazy/oil.nvim/lua/?.lua",
         "~/.local/share/nvim/lazy/which-key.nvim/lua/?.lua",
@@ -12,7 +12,7 @@
         "~/.local/share/nvim/lazy/telescope.nvim/lua/?.lua"
     ],
     "Lua.workspace.library": [
-        "neovim/runtime/lua",
+        "/usr/share/nvim/runtime/lua",
         // Neovim plugins
         "~/.local/share/nvim/lazy/oil.nvim/lua",
         "~/.local/share/nvim/lazy/which-key.nvim/lua",
