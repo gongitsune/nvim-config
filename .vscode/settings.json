@@ -45,6 +45,6 @@
         "editor.semanticHighlighting.enabled": true,
         "editor.formatOnSave": true,
         "editor.defaultFormatter": "sumneko.lua",
-        "editor.tabSize": 2
+        "editor.tabSize": 2,
     }
 }

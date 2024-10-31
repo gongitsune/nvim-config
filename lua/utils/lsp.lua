@@ -10,22 +10,22 @@ local M = {}
 ---               - name (string): Only return clients with the given name
 ---@return boolean # Whether or not any of the clients provide the capability
 function M.has_capability(capability, filter)
-    for _, client in ipairs(vim.lsp.get_clients(filter)) do
-        if client.supports_method(capability) then return true end
-    end
-    return false
+  for _, client in ipairs(vim.lsp.get_clients(filter)) do
+    if client.supports_method(capability) then return true end
+  end
+  return false
 end
 
 --- Helper function to LspAttach autocmd
 --- @param on_attach function<vim.lsp.Client|nil, integer> The function to call when attaching to a buffer
 function M.on_attach(on_attach)
-    vim.api.nvim_create_autocmd("LspAttach", {
-        callback = function(args)
-            local buffer = args.buf
-            local client = vim.lsp.get_client_by_id(args.data.client_id)
-            on_attach(client, buffer)
-        end
-    })
+  vim.api.nvim_create_autocmd("LspAttach", {
+    callback = function(args)
+      local buffer = args.buf
+      local client = vim.lsp.get_client_by_id(args.data.client_id)
+      on_attach(client, buffer)
+    end
+  })
 end
 
 return M
