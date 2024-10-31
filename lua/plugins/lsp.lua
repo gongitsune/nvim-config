@@ -52,6 +52,17 @@ return {
             --     require("rust-tools").setup {}
             -- end
           }
+
+          vim.diagnostic.config({
+            signs = true,
+            underline = true,
+            update_in_insert = true,
+            virtual_text = {
+              spacing = 4,
+              prefix = "",
+            },
+            severity_sort = true,
+          })
         end
       },
     },

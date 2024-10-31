@@ -292,7 +292,6 @@ wk.add({
 
 -- LSP
 require("utils.lsp").on_attach(function(client, bufnr)
-  local wk = require("which-key")
   local jump_diagnostic = function(count)
     return function() vim.diagnostic.jump({ count = count, float = true }) end
   end
