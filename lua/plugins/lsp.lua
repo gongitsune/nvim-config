@@ -1,7 +1,7 @@
 return {
     {
         "stevearc/aerial.nvim",
-        event = "User CustomFIle",
+        event = "User CustomFile",
         opts = {
             attach_mode = "global",
             backends = { "lsp", "treesitter", "markdown", "man" },
@@ -27,5 +27,34 @@ return {
                 ["]]"] = false,
             },
         },
+    },
+    {
+        "neovim/nvim-lspconfig",
+        dependencies = {
+            {
+                "williamboman/mason-lspconfig.nvim",
+                cmd = { "LspInstall", "LspUninstall" },
+                opts = {
+                    ensure_installed = {
+                        "lua_ls"
+                    }
+                },
+                config = function(_, opts)
+                    local mason_lspconfig = require("mason-lspconfig")
+                    mason_lspconfig.setup(opts)
+                    mason_lspconfig.setup_handlers {
+                        -- Default handler
+                        function(server_name)
+                            require("lspconfig")[server_name].setup {}
+                        end,
+                        -- Custom handlers
+                        -- ["rust_analyzer"] = function()
+                        --     require("rust-tools").setup {}
+                        -- end
+                    }
+                end
+            },
+        },
+        event = "User CustomFile",
     },
 }

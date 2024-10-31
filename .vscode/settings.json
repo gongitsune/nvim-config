@@ -9,6 +9,7 @@
         "~/.local/share/nvim/lazy/oil.nvim/lua/?.lua",
         "~/.local/share/nvim/lazy/which-key.nvim/lua/?.lua",
         "~/.local/share/nvim/lazy/toggleterm.nvim/lua/?.lua",
+        "~/.local/share/nvim/lazy/telescope.nvim/lua/?.lua"
     ],
     "Lua.workspace.library": [
         "neovim/runtime/lua",
@@ -16,6 +17,7 @@
         "~/.local/share/nvim/lazy/oil.nvim/lua",
         "~/.local/share/nvim/lazy/which-key.nvim/lua",
         "~/.local/share/nvim/lazy/toggleterm.nvim/lua",
+        "~/.local/share/nvim/lazy/telescope.nvim/lua"
     ],
     "[json]": {
         "editor.quickSuggestions": {
@@ -42,6 +44,7 @@
         },
         "editor.semanticHighlighting.enabled": true,
         "editor.formatOnSave": true,
-        "editor.defaultFormatter": "sumneko.lua"
+        "editor.defaultFormatter": "sumneko.lua",
+        "editor.tabSize": 2
     }
 }

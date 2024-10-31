@@ -16,7 +16,7 @@ return {
     },
     {
         "windwp/nvim-autopairs",
-        event = "User CustomFIle",
+        event = "User CustomFile",
         opts = {
             check_ts = true,
             ts_config = { java = false },

@@ -190,7 +190,7 @@ wk.add({
     { "<leader>fm", function() require("telescope.builtin").man_pages() end, desc = "Find man" },
     {
         "<leader>fn",
-        function() require("telescope").extensions.notify.notify() end,
+        "<cmd>Telescope noice<cr>",
         desc = "Find notifications"
     },
     {
@@ -289,3 +289,173 @@ wk.add({
     mode = { "n" },
     { "<leader>uC", "<cmd>ColorizerToggle<cr>", desc = "Toggle colorizer" },
 })
+
+-- LSP
+require("utils.lsp").on_attach(function(client, bufnr)
+    local wk = require("which-key")
+    local jump_diagnostic = function(count)
+        return function() vim.diagnostic.jump({ count = count, float = true }) end
+    end
+    local lsp_method_map = function(capability, key, action, desc)
+        if client.supports_method(capability) then
+            return { key, action, desc = desc }
+        end
+    end
+
+    local function add_buffer_autocmd(_augroup, _bufnr, autocmds)
+        if not vim.islist(autocmds) then autocmds = { autocmds } end
+        local cmds_found, cmds = pcall(vim.api.nvim_get_autocmds, { group = _augroup, buffer = _bufnr })
+        if not cmds_found or vim.tbl_isempty(cmds) then
+            vim.api.nvim_create_augroup(_augroup, { clear = false })
+            for _, _autocmd in ipairs(autocmds) do
+                local events = _autocmd.events
+                _autocmd.events = nil
+                _autocmd.group = _augroup
+                _autocmd.buffer = _bufnr
+                vim.api.nvim_create_autocmd(events, _autocmd)
+            end
+        end
+    end
+
+    local function del_buffer_autocmd(_augroup, _bufnr)
+        local cmds_found, cmds = pcall(vim.api.nvim_get_autocmds, { group = _augroup, buffer = _bufnr })
+        if cmds_found then vim.tbl_map(function(cmd) vim.api.nvim_del_autocmd(cmd.id) end, cmds) end
+    end
+
+    if client.supports_method "textDocument/codeLens" then
+        add_buffer_autocmd("lsp_codelens_refresh", bufnr, {
+            {
+                events = { "InsertLeave", "BufEnter" },
+                desc = "Refresh codelens",
+                callback = function()
+                    if require("utils.lsp").has_capability("textDocument/codeLens") then
+                        del_buffer_autocmd("lsp_codelens_refresh", bufnr)
+                        return
+                    end
+                    if vim.g.codelens_enabled then vim.lsp.codelens.refresh() end
+                end,
+            },
+        })
+        if vim.g.codelens_enabled then vim.lsp.codelens.refresh() end
+    end
+
+    if client.supports_method "textDocument/documentHighlight" then
+        add_buffer_autocmd("lsp_document_highlight", bufnr, {
+            {
+                events = { "CursorHold", "CursorHoldI" },
+                desc = "highlight references when cursor holds",
+                callback = function()
+                    if require("utils.lsp").has_capability("textDocument/documentHighlight") then
+                        del_buffer_autocmd("lsp_document_highlight", bufnr)
+                        return
+                    end
+                    vim.lsp.buf.document_highlight()
+                end,
+            },
+            {
+                events = { "CursorMoved", "CursorMovedI", "BufLeave" },
+                desc = "clear references when cursor moves",
+                callback = function() vim.lsp.buf.clear_references() end,
+            },
+        })
+    end
+
+    wk.add({
+        mode = { "n" },
+        buffer = bufnr,
+        { "<leader>ld", function() vim.diagnostic.open_float() end,                desc = "Hover diagnostics" },
+        { "[d",         jump_diagnostic(-1),                                       desc = "Previous diagnostic" },
+        { "]d",         jump_diagnostic(1),                                        desc = "Next diagnostic" },
+        { "gl",         function() vim.diagnostic.open_float() end,                desc = "Hover diagnostics" },
+
+        { "<leader>lD", function() require("telescope.builtin").diagnostics() end, desc = "Search diagnostics" },
+        { "<leader>li", "<cmd>LspInfo<cr>",                                        desc = "LSP information" },
+
+        {
+            mode = { "n", "v" },
+            lsp_method_map(
+                "textDocument/codeAction",
+                "<leader>la",
+                function() vim.lsp.buf.code_action() end,
+                "LSP code action"
+            ),
+            lsp_method_map(
+                "textDocument/formatting",
+                "<leader>lf",
+                function() vim.lsp.buf.format() end,
+                "Format buffer"
+            ),
+        },
+        lsp_method_map(
+            "textDocument/codeLens",
+            "<leader>ll",
+            function() vim.lsp.codelens.refresh() end,
+            "LSP CodeLens refresh"
+        ),
+        lsp_method_map(
+            "textDocument/codeLens",
+            "<leader>lL",
+            function() vim.lsp.codelens.run() end,
+            "LSP CodeLens run"
+        ),
+        lsp_method_map(
+            "textDocument/declaration",
+            "gD",
+            function() vim.lsp.buf.declaration() end,
+            "Declaration of current symbol"
+        ),
+        lsp_method_map(
+            "textDocument/definition",
+            "gd",
+            function() require("telescope.builtin").lsp_definitions() end,
+            "Show the definition of current symbol"
+        ),
+        lsp_method_map(
+            "textDocument/implementation",
+            "gI",
+            function() require("telescope.builtin").lsp_implementations() end,
+            "Implementation of current symbol"
+        ),
+        lsp_method_map(
+            "textDocument/references",
+            "gr",
+            function() require("telescope.builtin").lsp_references() end,
+            "References of current symbol"
+        ),
+        lsp_method_map(
+            "textDocument/rename",
+            "<leader>lr",
+            function() vim.lsp.buf.rename() end,
+            "Rename current symbol"
+        ),
+        lsp_method_map(
+            "textDocument/signatureHelp",
+            "<leader>lh",
+            function() vim.lsp.buf.signature_help() end,
+            "Signature help"
+        ),
+        lsp_method_map(
+            "textDocument/typeDefinition",
+            "gy",
+            function() require("telescope.builtin").lsp_type_definitions() end,
+            "Definition of current type"
+        ),
+        lsp_method_map(
+            "workspace/symbol",
+            "<leader>lG",
+            function()
+                vim.ui.input({ prompt = "Symbol Query: (leave empty for word under cursor)" }, function(query)
+                    if query then
+                        -- word under cursor if given query is empty
+                        if query == "" then query = vim.fn.expand "<cword>" end
+                        require("telescope.builtin").lsp_workspace_symbols {
+                            query = query,
+                            prompt_title = ("Find word (%s)"):format(query),
+                        }
+                    end
+                end)
+            end,
+            "Search workspace symbols"
+        ),
+    })
+end)

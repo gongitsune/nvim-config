@@ -3,7 +3,7 @@ return {
     dependencies = {
         "nvim-treesitter/nvim-treesitter-textobjects",
     },
-    event = "User CustomFIle",
+    event = "User CustomFile",
     cmd = {
         "TSBufDisable",
         "TSBufEnable",
@@ -45,6 +45,7 @@ return {
                 "query",
                 "vim",
                 "vimdoc",
+                "regex",
             },
             highlight = {
                 enable = true,
