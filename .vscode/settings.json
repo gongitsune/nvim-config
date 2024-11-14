@@ -1,0 +1,67 @@
+{
+    "Lua.runtime.version": "LuaJIT",
+    "Lua.runtime.path": [
+        "?.lua",
+        "?/init.lua",
+        "/usr/share/nvim/runtime/lua/vim",
+        "/usr/share/nvim/runtime/lua/vim/?.lua",
+        // Neovim plugins
+        "~/.local/share/nvim/lazy/oil.nvim/lua/?.lua",
+        "~/.local/share/nvim/lazy/which-key.nvim/lua/?.lua",
+        "~/.local/share/nvim/lazy/toggleterm.nvim/lua/?.lua",
+        "~/.local/share/nvim/lazy/telescope.nvim/lua/?.lua",
+        "~/.local/share/nvim/lazy/catppuccin/lua/?.lua",
+        "~/.local/share/nvim/lazy/mason.nvim/lua/?.lua",
+        "~/.local/share/nvim/lazy/overseer.nvim/lua/?.lua",
+        "~/.local/share/nvim/lazy/mini.nvim/lua/?.lua",
+        "~/.local/share/nvim/lazy/conform.nvim/lua/?.lua",
+        "~/.local/share/nvim/lazy/lazy.nvim/lua/?.lua",
+        "~/.local/share/nvim/lazy/nvim-lspconfig/lua/?.lua",
+        "~/.local/share/nvim/lazy/mason-lspconfig.nvim/lua/?.lua",
+        "~/.local/share/nvim/lazy/blink.cmp/lua/?.lua",
+    ],
+    "Lua.workspace.library": [
+        "/usr/share/nvim/runtime/lua",
+        // Neovim plugins
+        "~/.local/share/nvim/lazy/oil.nvim/lua",
+        "~/.local/share/nvim/lazy/which-key.nvim/lua",
+        "~/.local/share/nvim/lazy/toggleterm.nvim/lua",
+        "~/.local/share/nvim/lazy/telescope.nvim/lua",
+        "~/.local/share/nvim/lazy/catppuccin/lua",
+        "~/.local/share/nvim/lazy/mason.nvim/lua",
+        "~/.local/share/nvim/lazy/overseer.nvim/lua",
+        "~/.local/share/nvim/lazy/mini.nvim/lua",
+        "~/.local/share/nvim/lazy/conform.nvim/lua",
+        "~/.local/share/nvim/lazy/lazy.nvim/lua",
+        "~/.local/share/nvim/lazy/nvim-lspconfig/lua",
+        "~/.local/share/nvim/lazy/mason-lspconfig.nvim/lua",
+        "~/.local/share/nvim/lazy/blink.cmp/lua",
+    ],
+    "[json]": {
+        "editor.quickSuggestions": {
+            "strings": true
+        },
+        "editor.suggest.insertMode": "replace",
+        "editor.defaultFormatter": "vscode.json-language-features",
+        "editor.formatOnSave": true
+    },
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true,
+    },
+    "[lua]": {
+        "editor.quickSuggestions": {
+            "comments": "inline",
+            "other": "on",
+            "strings": "on"
+        },
+        "editor.semanticHighlighting.enabled": true,
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "sumneko.lua",
+        "editor.tabSize": 2,
+    }
+}
