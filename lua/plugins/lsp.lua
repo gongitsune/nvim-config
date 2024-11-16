@@ -4,7 +4,6 @@ return {
     dependencies = {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
-      "saghen/blink.cmp",
     },
     event = {
       "BufReadPre",
@@ -53,9 +52,6 @@ return {
         },
         ---@type table<string, lspconfig.Config>
         servers = {
-          rust_analyzer = {
-            enabled = false
-          },
           lua_ls = {
             settings = {
               Lua = {
@@ -117,7 +113,7 @@ return {
         "force",
         {},
         vim.lsp.protocol.make_client_capabilities(),
-        require('blink.cmp').get_lsp_capabilities(),
+        require("cmp_nvim_lsp").default_capabilities(),
         opts.capabilities or {}
       )
 
@@ -198,65 +194,5 @@ return {
         border = "rounded"
       }
     },
-  },
-  {
-    "saghen/blink.cmp",
-    lazy = false,
-    dependencies = {
-      "rafamadriz/friendly-snippets"
-    },
-    version = "*",
-    -- tag = "v0.5.0", -- Update tag
-    build = "cargo build --release",
-    ---@module "blink.cmp"
-    ---@type blink.cmp.Config
-    opts = {
-      keymap = {
-        preset = "enter",
-        ["<Tab>"] = {
-          function(cmp)
-            if require "utils.cmp".is_blink_open then
-              return cmp.select_next()
-            else
-              return cmp.snippet_forward()
-            end
-          end,
-          "fallback"
-        },
-        ["<S-Tab>"] = {
-          function(cmp)
-            if require "utils.cmp".is_blink_open then
-              return cmp.select_prev()
-            else
-              return cmp.snippet_backward()
-            end
-          end,
-          "fallback"
-        },
-      },
-      highlight = {
-        use_nvim_cmp_as_default = true,
-      },
-      nerd_font_variant = "Nerd Font Mono",
-      accept = { auto_brackets = { enabled = true } },
-      trigger = { signature_help = { enabled = true } },
-      windows = {
-        autocomplete = {
-          border = "rounded",
-          selection = "manual",
-        }
-      },
-    },
-    opts_extend = { "sources.completion.enabled_providers" },
-    config = function(_, opts)
-      require "blink.cmp".setup(opts)
-
-      require "blink.cmp".on_open(function()
-        require("utils.cmp").is_blink_open = true
-      end)
-      require "blink.cmp".on_close(function()
-        require("utils.cmp").is_blink_open = false
-      end)
-    end,
   },
 }
