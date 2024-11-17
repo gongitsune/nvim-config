@@ -52,6 +52,9 @@ return {
         },
         ---@type table<string, lspconfig.Config>
         servers = {
+          rust_analyzer = {
+            enabled = false,
+          },
           lua_ls = {
             settings = {
               Lua = {
