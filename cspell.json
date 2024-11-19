@@ -1,0 +1,28 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words": [
+    "nvim",
+    "stacklevel",
+    "windwp",
+    "autopairs",
+    "autotag",
+    "pmenusel",
+    "qwertyuiopzxcvbnmasdfghjkl",
+    "devicons",
+    "stevearc",
+    "muniftanjim",
+    "rcarriga",
+    "folke",
+    "noice",
+    "hrsh7th",
+    "cmdline",
+    "popupmenu",
+    "cmdline",
+    "lualine",
+    "fileformat",
+    "tabline",
+    "shiftwidth",
+    "expandtab"
+  ]
+}
