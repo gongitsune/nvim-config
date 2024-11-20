@@ -6,9 +6,25 @@ return {
 	{
 		"stevearc/oil.nvim",
 		cmd = { "Oil" },
+		keys = {
+			{
+				"<leader>e",
+				function()
+					require("oil").toggle_float()
+					vim.defer_fn(function()
+						require("oil").open_preview()
+					end, 100)
+				end,
+				desc = "Toggle oil float",
+			},
+		},
 		---@module 'oil'
 		---@type oil.SetupOpts
-		opts = {},
+		opts = {
+			keymaps = {
+				["q"] = "actions.close",
+			},
+		},
 	},
 	{
 		"rcarriga/nvim-notify",

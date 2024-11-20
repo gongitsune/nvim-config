@@ -23,6 +23,25 @@
     "fileformat",
     "tabline",
     "shiftwidth",
-    "expandtab"
+    "expandtab",
+    "worktrees",
+    "git_bcommits",
+    "keymaps",
+    "oldfiles",
+    "vsplit",
+    "enew",
+    "qall",
+    "theprimeagen",
+    "nvim_create_autocmd",
+    "fnamemodify",
+    "virt_text",
+    "nvim_buf_set_extmark",
+    "bufnr",
+    "devicon",
+    "numberwidth",
+    "relativenumber",
+    "bufs",
+    "buflisted",
+    "cnts"
   ]
 }
