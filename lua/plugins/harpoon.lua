@@ -95,7 +95,7 @@ return {
 							local virt_text = {}
 							for index, diag_cnt in ipairs(diag_cnts) do
 								if diag_cnt ~= 0 then
-									virt_text[index] = {
+									virt_text[#virt_text + 1] = {
 										" " .. diag_icons[index].icon .. diag_cnt,
 										diag_icons[index].hl,
 									}

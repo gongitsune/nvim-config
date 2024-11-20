@@ -42,6 +42,8 @@
     "relativenumber",
     "bufs",
     "buflisted",
-    "cnts"
+    "cnts",
+    "catppuccin",
+    "gitsigns"
   ]
 }
