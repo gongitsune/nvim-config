@@ -117,4 +117,36 @@ return {
 			}
 		end,
 	},
+	{
+		"shellRaining/hlchunk.nvim",
+		event = { "BufRead", "BufNewFile" },
+		opts = {
+			indent = {
+				enable = true,
+				chars = {
+					"│",
+				},
+				style = {
+					vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID("Whitespace")), "fg", "gui"),
+				},
+			},
+			chunk = {
+				enable = true,
+				delay = 10,
+				duration = 100,
+				exclude_filetypes = {
+					help = true,
+					startify = true,
+					aerial = true,
+					alpha = true,
+					dashboard = true,
+					lazy = true,
+					neogitstatus = true,
+					NvimTree = true,
+					neo = true,
+					Trouble = true,
+				},
+			},
+		},
+	},
 }

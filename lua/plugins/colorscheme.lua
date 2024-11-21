@@ -20,6 +20,7 @@ return {
 					enabled = true,
 				},
 				which_key = true,
+				harpoon = true,
 			},
 		},
 	},

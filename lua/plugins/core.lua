@@ -31,4 +31,23 @@ return {
 			}
 		end,
 	},
+	{
+		"mrjones2014/smart-splits.nvim",
+		opts = {
+			ignored_filetypes = { "nofile", "quickfix", "qf", "prompt", "oil" },
+			ignored_buftypes = { "nofile" },
+		},
+	},
+	{
+		"nmac427/guess-indent.nvim",
+		cmd = "GuessIndent",
+		event = { "BufRead", "BufNewFile" },
+		opts = {
+			filetype_exclude = {
+				"oil",
+				"harpoon",
+			},
+			auto_cmd = true,
+		},
+	},
 }

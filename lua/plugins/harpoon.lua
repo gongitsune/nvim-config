@@ -81,8 +81,10 @@ return {
 
 						local icon, icon_hl = devicon.get_icon(item.value, ext, { default = true })
 						vim.api.nvim_buf_set_extmark(bufnr, ns, i - 1, 0, {
-							virt_text = { { icon .. " ", icon_hl } },
+							virt_text = { { icon .. "  ", icon_hl } },
 							virt_text_pos = "inline",
+							right_gravity = false,
+							invalidate = true,
 						})
 						if diagnostics[item.value] ~= nil then
 							local diag_cnts = diagnostics[item.value]

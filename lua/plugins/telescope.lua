@@ -21,6 +21,12 @@ return {
 		end,
 	},
 	{
+		"danielfalk/smart-open.nvim",
+		dependencies = {
+			"kkharji/sqlite.lua",
+		},
+	},
+	{
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
 		keys = {
@@ -97,7 +103,7 @@ return {
 			{
 				"<leader>ff",
 				function()
-					require("telescope.builtin").find_files()
+					require("telescope").extensions.smart_open.smart_open()
 				end,
 				desc = "Find files",
 			},
@@ -202,6 +208,7 @@ return {
 				extensions = {
 					noice = {},
 					fzf = {},
+					smart_open = {},
 				},
 			}
 		end,
