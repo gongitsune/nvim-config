@@ -4,7 +4,6 @@ return {
 		event = "VeryLazy",
 		opts = function()
 			local icons = require("utils.icons").which_key
-
 			---@module "which-key"
 			---@type wk.Opts
 			return {

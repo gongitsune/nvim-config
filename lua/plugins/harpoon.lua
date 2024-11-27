@@ -6,6 +6,12 @@ return {
 			{
 				"<leader>H",
 				function()
+					local buf = vim.api.nvim_get_current_buf()
+					local filetype = vim.api.nvim_get_option_value("filetype", { buf = buf })
+					if filetype == nil or filetype == "" then
+						return
+					end
+
 					require("harpoon"):list():add()
 				end,
 				desc = "Harpoon file",
@@ -15,6 +21,7 @@ return {
 				function()
 					local harpoon = require("harpoon")
 					local height = math.floor(vim.api.nvim_win_get_height(0) * 0.8)
+					height = math.min(height, math.max(5, #harpoon:list()))
 					harpoon.ui:toggle_quick_menu(harpoon:list(), {
 						border = "rounded",
 						title_pos = "center",
@@ -23,6 +30,20 @@ return {
 					})
 				end,
 				desc = "Harpoon quick menu",
+			},
+			{
+				"[h",
+				function()
+					require("harpoon"):list():prev()
+				end,
+				desc = "Previous buffers stored within Harpoon list",
+			},
+			{
+				"]h",
+				function()
+					require("harpoon"):list():next()
+				end,
+				desc = "Next buffers stored within Harpoon list",
 			},
 		},
 		---@module "harpoon"
@@ -73,6 +94,7 @@ return {
 						end
 					end
 
+					local current_file = vim.fn.fnamemodify(cx.current_file, ":.")
 					for i, item in ipairs(list.items) do
 						local ext = vim.fn.fnamemodify(item.value, ":e")
 						if ext == nil then
@@ -108,18 +130,13 @@ return {
 							})
 						end
 
+						if item.value == current_file then
+							vim.schedule(function()
+								vim.api.nvim_win_set_cursor(cx.win_id, { i, 0 })
+							end)
+						end
+
 						::continue::
-					end
-				end,
-			})
-		end,
-		init = function()
-			vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-				callback = function(ev)
-					local buf = ev.buf
-					local filetype = vim.api.nvim_get_option_value("filetype", { buf = buf })
-					if not vim.list_contains({ "oil" }, filetype) then
-						require("harpoon"):list():add()
 					end
 				end,
 			})

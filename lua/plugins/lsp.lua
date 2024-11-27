@@ -172,6 +172,8 @@ return {
 					handlers = { setup },
 				})
 			end
+
+			require("utils.lsp").register_lsp_keymap_event()
 		end,
 	},
 	{
