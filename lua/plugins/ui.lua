@@ -18,19 +18,23 @@ return {
 				desc = "Toggle oil float",
 			},
 		},
-		---@module 'oil'
-		---@type oil.SetupOpts
-		opts = {
-			keymaps = {
-				["q"] = "actions.close",
-			},
-		},
-	},
-	{
-		"rcarriga/nvim-notify",
-		opts = {
-			render = "compact",
-		},
+		opts = function()
+			local win_width = vim.api.nvim_win_get_width(0)
+			local win_height = vim.api.nvim_win_get_height(0)
+
+			---@module 'oil'
+			---@type oil.SetupOpts
+			return {
+				keymaps = {
+					["q"] = "actions.close",
+				},
+				float = {
+					-- max_width = math.floor(win_width * 0.8),
+					-- max_height = math.floor(win_height * 0.8),
+				},
+				default_file_explorer = true,
+			}
+		end,
 	},
 	{
 		"folke/noice.nvim",

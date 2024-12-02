@@ -79,6 +79,11 @@
     "gongitsune",
     "keymap",
     "kosayoda",
-    "autocmd"
+    "autocmd",
+    "winid",
+    "bigfile",
+    "quickfile",
+    "statuscolumn",
+    "bufname"
   ]
 }

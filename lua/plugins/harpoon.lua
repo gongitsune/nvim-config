@@ -13,6 +13,7 @@ return {
 					end
 
 					require("harpoon"):list():add()
+					vim.notify("The current buffer has been added to the harpoon list", vim.log.levels.INFO)
 				end,
 				desc = "Harpoon file",
 			},
@@ -71,6 +72,7 @@ return {
 					local icons = require("utils.icons")
 
 					local diagnostics = {}
+					local buf_names = {}
 					for _, buf in ipairs(vim.api.nvim_list_bufs()) do
 						if
 							vim.api.nvim_buf_is_valid(buf)
@@ -78,6 +80,7 @@ return {
 							and vim.fn.buflisted(buf) == 1
 						then
 							local buf_name = vim.api.nvim_buf_get_name(buf)
+							local normal_buf_name = vim.fn.fnamemodify(buf_name, ":.")
 
 							local severities = {
 								vim.diagnostic.severity.ERROR,
@@ -90,7 +93,8 @@ return {
 							for _, severity in ipairs(severities) do
 								buf_diagnostics[severity] = #vim.diagnostic.get(buf, { severity = severity })
 							end
-							diagnostics[vim.fn.fnamemodify(buf_name, ":.")] = buf_diagnostics
+							diagnostics[normal_buf_name] = buf_diagnostics
+							buf_names[normal_buf_name] = buf
 						end
 					end
 
@@ -108,6 +112,19 @@ return {
 							right_gravity = false,
 							invalidate = true,
 						})
+
+						local virt_text = {}
+
+						if buf_names[item.value] ~= nil then
+							local is_modified =
+								vim.api.nvim_get_option_value("modified", { buf = buf_names[item.value] })
+							if is_modified then
+								virt_text[#virt_text + 1] = {
+									"[+]",
+								}
+							end
+						end
+
 						if diagnostics[item.value] ~= nil then
 							local diag_cnts = diagnostics[item.value]
 							local diag_icons = {
@@ -116,7 +133,7 @@ return {
 								{ hl = "DiagnosticInfo", icon = icons.diagnostics.Info },
 								{ hl = "DiagnosticHint", icon = icons.diagnostics.Hint },
 							}
-							local virt_text = {}
+
 							for index, diag_cnt in ipairs(diag_cnts) do
 								if diag_cnt ~= 0 then
 									virt_text[#virt_text + 1] = {
@@ -125,10 +142,11 @@ return {
 									}
 								end
 							end
-							vim.api.nvim_buf_set_extmark(bufnr, ns, i - 1, 0, {
-								virt_text = virt_text,
-							})
 						end
+
+						vim.api.nvim_buf_set_extmark(bufnr, ns, i - 1, 0, {
+							virt_text = virt_text,
+						})
 
 						if item.value == current_file then
 							vim.schedule(function()
