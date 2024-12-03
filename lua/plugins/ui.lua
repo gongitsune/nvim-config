@@ -19,9 +19,6 @@ return {
 			},
 		},
 		opts = function()
-			local win_width = vim.api.nvim_win_get_width(0)
-			local win_height = vim.api.nvim_win_get_height(0)
-
 			---@module 'oil'
 			---@type oil.SetupOpts
 			return {
@@ -29,8 +26,8 @@ return {
 					["q"] = "actions.close",
 				},
 				float = {
-					-- max_width = math.floor(win_width * 0.8),
-					-- max_height = math.floor(win_height * 0.8),
+					max_width = math.floor(vim.o.columns * 0.8),
+					max_height = math.floor(vim.o.lines * 0.8),
 				},
 				default_file_explorer = true,
 			}

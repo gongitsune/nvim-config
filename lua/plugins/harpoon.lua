@@ -74,11 +74,7 @@ return {
 					local diagnostics = {}
 					local buf_names = {}
 					for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-						if
-							vim.api.nvim_buf_is_valid(buf)
-							and vim.api.nvim_buf_is_loaded(buf)
-							and vim.fn.buflisted(buf) == 1
-						then
+						if vim.api.nvim_buf_is_valid(buf) and vim.api.nvim_buf_is_loaded(buf) and vim.fn.buflisted(buf) == 1 then
 							local buf_name = vim.api.nvim_buf_get_name(buf)
 							local normal_buf_name = vim.fn.fnamemodify(buf_name, ":.")
 
@@ -116,8 +112,7 @@ return {
 						local virt_text = {}
 
 						if buf_names[item.value] ~= nil then
-							local is_modified =
-								vim.api.nvim_get_option_value("modified", { buf = buf_names[item.value] })
+							local is_modified = vim.api.nvim_get_option_value("modified", { buf = buf_names[item.value] })
 							if is_modified then
 								virt_text[#virt_text + 1] = {
 									"[+]",
