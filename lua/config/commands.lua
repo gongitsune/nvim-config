@@ -6,7 +6,3 @@ vim.api.nvim_create_user_command("CSpellAppend", function(opts)
 
 	require("utils.cspell").add_word_to_workspace(word)
 end, { nargs = "?" })
-
-vim.api.nvim_create_user_command("BufManage", function()
-	require("features.buf_manager"):open()
-end, {})

@@ -84,6 +84,10 @@
     "bigfile",
     "quickfile",
     "statuscolumn",
-    "bufname"
+    "bufname",
+    "nargs",
+    "cword",
+    "lazygit",
+    "zbirenbaum"
   ]
 }

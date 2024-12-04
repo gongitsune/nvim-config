@@ -1,8 +1,8 @@
 for _, source in ipairs({
 	"config/options",
 	"config/lazy",
-	-- "config/autocmds",
 	"config/commands",
+	"config/autocmds",
 	"config/mappings",
 }) do
 	local status_ok, fault = pcall(require, source)
