@@ -7,6 +7,9 @@ return {
 			filetypes = {
 				gitcommit = true,
 			},
+			suggestion = {
+				auto_trigger = true,
+			},
 		},
 		config = function(_, opts)
 			require("copilot").setup(opts)

@@ -11,6 +11,41 @@ return {
 				end,
 				desc = "Open lazygit with snacks",
 			},
+			{
+				"<leader>tf",
+				function()
+					require("snacks.terminal").toggle("fish", {
+						win = {
+							width = 0.8,
+							height = 0.8,
+							border = "rounded",
+						},
+					})
+				end,
+				desc = "Toggle terminal",
+			},
+			{
+				"<leader>th",
+				function()
+					require("snacks.terminal").toggle(nil, {
+						win = {
+							height = 0.2,
+						},
+					})
+				end,
+				desc = "Toggle vertical terminal",
+			},
+			{
+				"<leader>tH",
+				function()
+					require("snacks.terminal").open(nil, {
+						win = {
+							height = 0.2,
+						},
+					})
+				end,
+				desc = "Open vertical terminal",
+			},
 		},
 		opts = {
 			bigfile = { enabled = true },

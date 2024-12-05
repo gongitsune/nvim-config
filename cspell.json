@@ -88,6 +88,13 @@
     "nargs",
     "cword",
     "lazygit",
-    "zbirenbaum"
+    "zbirenbaum",
+    "virtbuf",
+    "mfussenegger",
+    "formatexpr",
+    "signcolumn",
+    "fixbuf",
+    "bnext",
+    "bprev"
   ]
 }
