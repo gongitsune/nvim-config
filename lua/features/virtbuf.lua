@@ -56,6 +56,8 @@ function M:render()
 	local win_buf = self.win.buf
 	assert(win_buf, "snacks win's buf is nil")
 
+	vim.api.nvim_set_option_value("modifiable", true, { buf = win_buf })
+
 	local ns_id = vim.api.nvim_create_namespace("virtbuf")
 	vim.api.nvim_buf_clear_namespace(win_buf, ns_id, 0, -1)
 	vim.api.nvim_buf_set_lines(win_buf, 0, -1, false, {})
@@ -95,6 +97,8 @@ function M:render()
 
 	-- delete the rest of the lines
 	vim.api.nvim_buf_set_lines(win_buf, #self.buffers, -1, true, {})
+
+	vim.api.nvim_set_option_value("modifiable", false, { buf = win_buf })
 end
 
 function M:select_current_line()
@@ -113,6 +117,27 @@ function M:select_current_line()
 	end
 end
 
+function M:delete_current_line()
+	local cursor = vim.api.nvim_win_get_cursor(0)
+	local buf_info = self.buffers[cursor[1]]
+	if not buf_info then
+		return
+	end
+
+	Snacks.bufdelete.delete({
+		buf = buf_info.bufnr,
+	})
+end
+
+function M:correct_and_render()
+	vim.schedule(function()
+		if self.win and self.win:valid() then
+			self:collect_buffers()
+			self:render()
+		end
+	end)
+end
+
 function M:open()
 	if self.win then
 		if not self.win:valid() then
@@ -127,10 +152,7 @@ function M:open()
 		position = "left",
 		width = 0.2,
 		on_buf = function(_)
-			vim.schedule(function()
-				self:collect_buffers()
-				self:render()
-			end)
+			self:correct_and_render()
 		end,
 		fixbuf = true,
 		wo = {
@@ -140,16 +162,17 @@ function M:open()
 			["<cr>"] = function(_)
 				self:select_current_line()
 			end,
+			["d"] = function(_)
+				self:delete_current_line()
+				self:correct_and_render()
+			end,
 		},
 	})
 
 	local event = require("nui.utils.autocmd").event
-	vim.api.nvim_create_autocmd({ event.BufEnter }, {
+	vim.api.nvim_create_autocmd({ event.BufEnter, event.BufDelete, event.BufWipeout }, {
 		callback = function()
-			if self.win and self.win:valid() then
-				self:collect_buffers()
-				self:render()
-			end
+			M:correct_and_render()
 		end,
 	})
 end

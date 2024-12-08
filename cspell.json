@@ -95,6 +95,7 @@
     "signcolumn",
     "fixbuf",
     "bnext",
-    "bprev"
+    "bprev",
+    "bufdelete"
   ]
 }

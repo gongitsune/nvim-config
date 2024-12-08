@@ -14,6 +14,15 @@ wk.add({
 	{ "\\", "<cmd>split<cr>", desc = "Horizontal Split" },
 	{ "]b", "bnext", desc = "Next buffers" },
 	{ "[b", "bprev", desc = "Previous buffers" },
+	{
+		"<leader>bc",
+		function()
+			Snacks.bufdelete.delete({
+				buf = vim.api.nvim_get_current_buf(),
+			})
+		end,
+		desc = "Delete current buffer",
+	},
 })
 
 wk.add({
