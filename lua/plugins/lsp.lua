@@ -81,6 +81,11 @@ return {
 							},
 						},
 					},
+					clangd = {
+						capabilities = {
+							offsetEncoding = "utf-8",
+						},
+					},
 				},
 				---@type table<string, fun(server:string, opts:lspconfig.Config):boolean?>
 				setup = {

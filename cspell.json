@@ -96,6 +96,7 @@
     "fixbuf",
     "bnext",
     "bprev",
-    "bufdelete"
+    "bufdelete",
+    "clangd"
   ]
 }
