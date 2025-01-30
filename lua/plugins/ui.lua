@@ -65,6 +65,15 @@ return {
 					return vim.bo.tabstop .. " tab"
 				end
 			end
+
+			local lint_progress = function()
+				local linters = require("lint").get_running()
+				if #linters == 0 then
+					return "󰦕"
+				end
+				return "󱉶 " .. table.concat(linters, ", ")
+			end
+
 			return {
 				options = {
 					component_separators = "",
@@ -84,7 +93,7 @@ return {
 							},
 						},
 					},
-					lualine_x = { indent_style },
+					lualine_x = { lint_progress, indent_style },
 					lualine_y = { "progress" },
 					lualine_z = { "location" },
 				},

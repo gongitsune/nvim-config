@@ -97,6 +97,11 @@
     "bnext",
     "bprev",
     "bufdelete",
-    "clangd"
+    "clangd",
+    "cpplint",
+    "ts_context_commentstring",
+    "joosepalviste",
+    "commentstring",
+    "linewise"
   ]
 }

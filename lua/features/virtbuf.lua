@@ -29,26 +29,26 @@ function M:collect_buffers()
 	local devicon = require("nvim-web-devicons")
 
 	self.buffers = vim.iter(vim.api.nvim_list_bufs())
-		:filter(function(bufnr)
-			return vim.fn.buflisted(bufnr) == 1
-		end)
-		:map(function(bufnr)
-			local bufname = vim.fn.bufname(bufnr)
-			local filetype = vim.bo[bufnr].filetype
-			local icon, icon_hl = devicon.get_icon_by_filetype(filetype, { default = true })
-			local modified = vim.bo[bufnr].modified
+			:filter(function(bufnr)
+				return vim.fn.buflisted(bufnr) == 1
+			end)
+			:map(function(bufnr)
+				local bufname = vim.fn.bufname(bufnr)
+				local filetype = vim.bo[bufnr].filetype
+				local icon, icon_hl = devicon.get_icon_by_filetype(filetype, { default = true })
+				local modified = vim.bo[bufnr].modified
 
-			---@type BufInfo
-			return {
-				bufnr = bufnr,
-				name = bufname,
-				icon = icon,
-				icon_hl = icon_hl,
-				filetype = filetype,
-				modified = modified,
-			}
-		end)
-		:totable()
+				---@type BufInfo
+				return {
+					bufnr = bufnr,
+					name = bufname,
+					icon = icon,
+					icon_hl = icon_hl,
+					filetype = filetype,
+					modified = modified,
+				}
+			end)
+			:totable()
 end
 
 function M:render()
@@ -149,12 +149,14 @@ function M:open()
 	end
 
 	self.win = Snacks.win({
+		relative = "editor",
 		position = "left",
 		width = 0.2,
 		on_buf = function(_)
 			self:correct_and_render()
 		end,
 		fixbuf = true,
+		---@diagnostic disable-next-line: missing-fields
 		wo = {
 			spell = false,
 		},
@@ -175,6 +177,21 @@ function M:open()
 			M:correct_and_render()
 		end,
 	})
+end
+
+function M:close()
+	if self.win then
+		self.win:close()
+		self.win = nil
+	end
+end
+
+function M:toggle()
+	if self.win and self.win:valid() then
+		self:close()
+	else
+		self:open()
+	end
 end
 
 return M

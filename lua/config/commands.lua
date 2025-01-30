@@ -8,5 +8,5 @@ vim.api.nvim_create_user_command("CSpellAppend", function(opts)
 end, { nargs = "?" })
 
 vim.api.nvim_create_user_command("BufManage", function()
-	require("features.virtbuf"):open()
+	require("features.virtbuf"):toggle()
 end, {})
