@@ -107,6 +107,7 @@
     "augroup",
     "stopinsert",
     "winfixbuf",
-    "biomejs"
+    "biomejs",
+    "tiktoken"
   ]
 }
