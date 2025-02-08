@@ -106,6 +106,7 @@
     "clangtidy",
     "augroup",
     "stopinsert",
-    "winfixbuf"
+    "winfixbuf",
+    "biomejs"
   ]
 }

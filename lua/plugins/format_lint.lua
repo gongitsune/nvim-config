@@ -30,10 +30,10 @@ return {
 			require("lint").linters_by_ft = {
 				lua = { "selene" },
 				cpp = { "clangtidy" },
-				typescript = { "biome" },
-				typescriptreact = { "biome" },
-				javascript = { "biome" },
-				json = { "biome" },
+				typescript = { "biomejs" },
+				typescriptreact = { "biomejs" },
+				javascript = { "biomejs" },
+				json = { "biomejs" },
 			}
 			vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 				callback = function()
