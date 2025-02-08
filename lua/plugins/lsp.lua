@@ -52,9 +52,11 @@ return {
 				},
 				---@type table<string, lspconfig.Config>
 				servers = {
+					---@diagnostic disable-next-line: missing-fields
 					rust_analyzer = {
 						enabled = false,
 					},
+					---@diagnostic disable-next-line: missing-fields
 					lua_ls = {
 						settings = {
 							Lua = {
@@ -169,6 +171,7 @@ return {
 
 			if have_mason then
 				mlsp.setup({
+					automatic_installation = false,
 					ensure_installed = vim.tbl_deep_extend(
 						"force",
 						ensure_installed,

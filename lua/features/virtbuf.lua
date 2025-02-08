@@ -13,6 +13,7 @@
 ---@field buffers table<number, BufInfo>
 local M = {
 	win = nil,
+	augroup = nil,
 	buffers = {},
 }
 
@@ -148,6 +149,7 @@ function M:open()
 		return
 	end
 
+	self.augroup = vim.api.nvim_create_augroup("virtbuf", { clear = true })
 	self.win = Snacks.win({
 		relative = "editor",
 		position = "left",
@@ -159,6 +161,7 @@ function M:open()
 		---@diagnostic disable-next-line: missing-fields
 		wo = {
 			spell = false,
+			winfixbuf = true,
 		},
 		keys = {
 			["<cr>"] = function(_)
@@ -173,7 +176,11 @@ function M:open()
 
 	local event = require("nui.utils.autocmd").event
 	vim.api.nvim_create_autocmd({ event.BufEnter, event.BufDelete, event.BufWipeout }, {
+		group = self.augroup,
 		callback = function()
+			if not self.win or not self.win:valid() then
+				return
+			end
 			M:correct_and_render()
 		end,
 	})
@@ -183,6 +190,10 @@ function M:close()
 	if self.win then
 		self.win:close()
 		self.win = nil
+		if self.augroup then
+			vim.api.nvim_del_augroup_by_id(self.augroup)
+			self.augroup = nil
+		end
 	end
 end
 

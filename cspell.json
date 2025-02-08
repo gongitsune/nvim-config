@@ -102,6 +102,10 @@
     "ts_context_commentstring",
     "joosepalviste",
     "commentstring",
-    "linewise"
+    "linewise",
+    "clangtidy",
+    "augroup",
+    "stopinsert",
+    "winfixbuf"
   ]
 }

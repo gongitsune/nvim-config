@@ -6,6 +6,10 @@ return {
 		opts = {
 			formatters_by_ft = {
 				lua = { "stylua" },
+				cpp = { "clang-format" },
+				typescript = { "biome" },
+				typescriptreact = { "biome" },
+				javascript = { "biome" },
 			},
 			format_on_save = {
 				timeout_ms = 500,
@@ -26,6 +30,10 @@ return {
 			require("lint").linters_by_ft = {
 				lua = { "selene" },
 				cpp = { "clangtidy" },
+				typescript = { "biome" },
+				typescriptreact = { "biome" },
+				javascript = { "biome" },
+				json = { "biome" },
 			}
 			vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 				callback = function()
