@@ -10,6 +10,7 @@ return {
 				typescript = { "biome" },
 				typescriptreact = { "biome" },
 				javascript = { "biome" },
+				python = { "ruff" }
 			},
 			format_on_save = {
 				timeout_ms = 500,
@@ -34,6 +35,7 @@ return {
 				typescriptreact = { "biomejs" },
 				javascript = { "biomejs" },
 				json = { "biomejs" },
+				python = { "ruff" },
 			}
 			vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 				callback = function()
