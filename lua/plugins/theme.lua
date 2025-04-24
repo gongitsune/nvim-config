@@ -7,20 +7,19 @@ return {
 			flavour = "mocha",
 			transparent_background = true,
 			integrations = {
-				cmp = true,
+				blink_cmp = true,
 				gitsigns = true,
 				treesitter = true,
-				notify = true,
 				mini = {
 					enabled = true,
 				},
 				mason = true,
-				noice = true,
-				telescope = {
-					enabled = true,
-				},
 				which_key = true,
-				harpoon = true,
+				snacks = {
+					enabled = true,
+					indent_scope_color = "",
+				},
+				lsp_trouble = true
 			},
 		},
 	},
