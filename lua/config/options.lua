@@ -63,6 +63,9 @@ local options = {
     loaded_netrwPlugin = 1,                          -- disable netrw plugin
     copilot_no_tab_map = true,                       -- disable copilot.vim tab mappings
   },
+  o = {
+    winborder = "rounded", -- set border style for floating windows
+  }
 }
 
 for scope, table in pairs(options) do
