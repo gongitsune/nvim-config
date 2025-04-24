@@ -14,6 +14,16 @@ return {
                 }
             }
         },
+        lazygit = {
+            win = { style = { border = "rounded" } }
+        },
+        zen = {
+            toggles = {
+                dim = false,
+                git_signs = true,
+                mini_diff_signs = true,
+            }
+        },
         scratch = {},
         indent = { enabled = true },
         input = { enabled = true },
@@ -27,13 +37,19 @@ return {
         { "<leader>.",       function() Snacks.scratch() end,                desc = "Toggle Scratch Buffer" },
         { "<leader>S",       function() Snacks.scratch.select() end,         desc = "Select Scratch Buffer" },
 
+        -- Lazygit
+        { "<leader>gg",      function() Snacks.lazygit() end,                desc = "Lazygit" },
+
+        -- Zen
+        { "<leader>zz",      function() Snacks.zen() end,                    desc = "Toggle zen mode" },
+
         -- Top Pickers & Explorer
         { "<leader><space>", function() Snacks.picker.smart() end,           desc = "Smart Find Files" },
         { "<leader>,",       function() Snacks.picker.buffers() end,         desc = "Buffers" },
         { "<leader>/",       function() Snacks.picker.grep() end,            desc = "Grep" },
         { "<leader>:",       function() Snacks.picker.command_history() end, desc = "Command History" },
         { "<leader>n",       function() Snacks.picker.notifications() end,   desc = "Notification History" },
-        { "<leader>e",       function() Snacks.explorer() end,               desc = "File Explorer" },
+        { "<leader>E",       function() Snacks.explorer() end,               desc = "File Explorer" },
         -- find
         { "<leader>fb",      function() Snacks.picker.buffers() end,         desc = "Buffers" },
         {
@@ -87,7 +103,7 @@ return {
         { "gD",         function() Snacks.picker.lsp_declarations() end,      desc = "Goto Declaration" },
         { "gr",         function() Snacks.picker.lsp_references() end,        nowait = true,                     desc = "References" },
         { "gI",         function() Snacks.picker.lsp_implementations() end,   desc = "Goto Implementation" },
-        { "gy",         function() Snacks.picker.lsp_type_definitions() end,  desc = "Goto T[y]pe Definition" },
+        { "gy",         function() Snacks.picker.lsp_type_definitions() end,  desc = "Goto Type Definition" },
         { "<leader>ss", function() Snacks.picker.lsp_symbols() end,           desc = "LSP Symbols" },
         { "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP Workspace Symbols" },
     }
