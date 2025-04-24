@@ -3,7 +3,7 @@ for _, source in ipairs({
 	"config/lazy",
 	-- "config/commands",
 	-- "config/autocmds",
-	-- "config/mappings",
+	"config/mappings",
 	"lsp"
 }) do
 	local status_ok, fault = pcall(require, source)
