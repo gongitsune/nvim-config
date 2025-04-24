@@ -21,6 +21,7 @@
         "~/.local/share/nvim/lazy/nvim-cmp/lua/?.lua",
         "~/.local/share/nvim/lazy/snacks.nvim/lua/?.lua",
         "~/.local/share/nvim/lazy/todo-comments.nvim/lua/?.lua",
+        "~/.local/share/nvim/lazy/blink.cmp/lua/?.lua"
     ],
     "Lua.workspace.library": [
         "/usr/share/nvim/runtime/lua",
@@ -38,7 +39,8 @@
         "~/.local/share/nvim/lazy/nvim-lspconfig/lua",
         "~/.local/share/nvim/lazy/mason-lspconfig.nvim/lua",
         "~/.local/share/nvim/lazy/snacks.nvim/lua",
-        "~/.local/share/nvim/lazy/todo-comments.nvim/lua"
+        "~/.local/share/nvim/lazy/todo-comments.nvim/lua",
+        "~/.local/share/nvim/lazy/blink.cmp/lua"
     ],
     "[json]": {
         "editor.quickSuggestions": {

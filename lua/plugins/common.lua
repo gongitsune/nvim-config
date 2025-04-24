@@ -1,5 +1,6 @@
 return {
   "nvim-lua/plenary.nvim",
   "nvim-tree/nvim-web-devicons",
-  { "echasnovski/mini.icons", opts = {} }
+  { "echasnovski/mini.icons", opts = {} },
+  "rafamadriz/friendly-snippets"
 }

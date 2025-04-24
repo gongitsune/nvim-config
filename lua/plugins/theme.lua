@@ -3,6 +3,8 @@ return {
 		"catppuccin/nvim",
 		name = "catppuccin",
 		priority = 1000,
+		---@module "catppuccin"
+		---@type CatppuccinOptions
 		opts = {
 			flavour = "mocha",
 			transparent_background = true,
@@ -17,7 +19,7 @@ return {
 				which_key = true,
 				snacks = {
 					enabled = true,
-					indent_scope_color = "",
+					indent_scope_color = "lavender",
 				},
 				lsp_trouble = true
 			},

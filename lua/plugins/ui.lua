@@ -6,7 +6,10 @@ return {
       {
         "<leader>e",
         function()
-          -- if oil
+          if vim.bo.filetype == "oil" then
+            return
+          end
+
           require("oil").open_float(
             nil,
             ---@type oil.OpenOpts

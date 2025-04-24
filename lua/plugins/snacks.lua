@@ -12,6 +12,15 @@ return {
             sources = {
                 explorer = {
                 }
+            },
+            matcher = {
+                cwd_bonus = true,
+                file_pos = true,
+                filename_bonus = true,
+                frecency = true,
+                fuzzy = true,
+                history_bonus = true,
+                ignorecase = true,
             }
         },
         lazygit = {
@@ -29,7 +38,6 @@ return {
         input = { enabled = true },
         notifier = { enabled = true },
         scope = { enabled = true },
-        scroll = { enabled = true },
         words = { enabled = true },
     },
     keys = {
@@ -59,7 +67,11 @@ return {
             end,
             desc = "Find Config File"
         },
-        { "<leader>ff", function() Snacks.picker.files() end,                 desc = "Find Files" },
+        {
+            "<leader>ff",
+            function() Snacks.picker.files() end,
+            desc = "Find Files"
+        },
         { "<leader>fg", function() Snacks.picker.git_files() end,             desc = "Find Git Files" },
         { "<leader>fp", function() Snacks.picker.projects() end,              desc = "Projects" },
         { "<leader>fr", function() Snacks.picker.recent() end,                desc = "Recent" },
