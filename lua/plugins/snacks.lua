@@ -33,6 +33,14 @@ return {
                 mini_diff_signs = true,
             }
         },
+        terminal = {
+            win = {
+                style = "float",
+                width = math.floor(vim.o.columns * 0.8),
+                height = math.floor(vim.o.lines * 0.8),
+                border = "rounded"
+            }
+        },
         statuscolumn = {},
         scratch = {},
         indent = { enabled = true },
@@ -40,6 +48,8 @@ return {
         notifier = { enabled = true },
         scope = { enabled = true },
         words = { enabled = true },
+        bigfile = { enabled = true },
+        quickfile = { enabled = true },
     },
     keys = {
         -- Scratch
@@ -51,6 +61,9 @@ return {
 
         -- Zen
         { "<leader>zz",      function() Snacks.zen() end,                    desc = "Toggle zen mode" },
+
+        -- Terminal
+        { "<leader>t",       function() Snacks.terminal.toggle() end,        desc = "Toggle terminal" },
 
         -- Top Pickers & Explorer
         { "<leader><space>", function() Snacks.picker.smart() end,           desc = "Smart Find Files" },
