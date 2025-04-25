@@ -33,6 +33,7 @@ return {
                 mini_diff_signs = true,
             }
         },
+        statuscolumn = {},
         scratch = {},
         indent = { enabled = true },
         input = { enabled = true },

@@ -2,7 +2,7 @@ for _, source in ipairs({
 	"config/options",
 	"config/lazy",
 	-- "config/commands",
-	-- "config/autocmds",
+	"config/autocmds",
 	"config/mappings",
 	"lsp"
 }) do
