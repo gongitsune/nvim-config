@@ -6,25 +6,7 @@ return {
     ---@type blink.cmp.Config
     opts = {
       keymap = {
-        ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
-        ["<C-e>"] = { "hide", "fallback" },
-
-        ["<Tab>"] = { "select_next", "fallback" },
-        ["<S-Tab>"] = { "select_prev", "fallback" },
-
-        ["<Up>"] = { "select_prev", "fallback" },
-        ["<Down>"] = { "select_next", "fallback" },
-
-        ["<CR>"] = { "accept", "fallback" },
-
-        ["<C-n>"] = { "snippet_forward", "fallback" },
-        ["<C-p>"] = { "snippet_backward", "fallback" },
-
-        ["<C-b>"] = { "scroll_documentation_up", "fallback" },
-        ["<C-f>"] = { "scroll_documentation_down", "fallback" },
-
-        ["<C-k>"] = { "show_signature", "hide_signature", "select_prev", "fallback" },
-        ["<C-j>"] = { "select_next", "fallback" },
+        preset = "default",
       },
 
       appearance = {
@@ -35,17 +17,18 @@ return {
         accept = {
           auto_brackets = { enabled = true }
         },
-        ghost_text = {
-          enabled = true,
-        },
         documentation = {
           auto_show = true,
+          auto_show_delay_ms = 200,
           window = {
             border = "rounded"
           }
         },
         menu = {
-          border = "rounded"
+          border = "rounded",
+          draw = {
+            treesitter = { "lsp" }
+          }
         },
         list = {
           window = {
@@ -118,7 +101,14 @@ return {
       vim.api.nvim_create_autocmd({ "BufWritePost" }, {
         callback = function()
           require("lint").try_lint()
-          require("lint").try_lint("cspell")
+
+          local found_dirs = vim.fs.find({ "cspell.json" }, {
+            upward = true,
+            path = vim.fs.dirname(vim.fs.normalize(vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf()))),
+          })
+          if #found_dirs > 0 then
+            require("lint").try_lint("cspell")
+          end
         end,
       })
     end,
