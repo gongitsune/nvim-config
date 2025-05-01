@@ -14,5 +14,5 @@ return {
       -- better deal with markdown code blocks
       markdown = true,
     },
-  }
+  },
 }

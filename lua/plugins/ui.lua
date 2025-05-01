@@ -1,6 +1,6 @@
 return {
   {
-    'stevearc/oil.nvim',
+    "stevearc/oil.nvim",
     lazy = false,
     keys = {
       {
@@ -39,34 +39,39 @@ return {
     event = "VeryLazy",
     config = function()
       require("bufferline").setup(
-      ---@module "bufferline",
-      ---@type bufferline.UserConfig
+        ---@module "bufferline",
+        ---@type bufferline.UserConfig
         {
           highlights = require("catppuccin.groups.integrations.bufferline").get(),
           options = {
-            close_command = function(n) Snacks.bufdelete(n) end,
-            right_mouse_command = function(n) Snacks.bufdelete(n) end,
+            close_command = function(n)
+              Snacks.bufdelete(n)
+            end,
+            right_mouse_command = function(n)
+              Snacks.bufdelete(n)
+            end,
             diagnostics = "nvim_lsp",
             always_show_bufferline = false,
             show_buffer_close_icons = false,
             diagnostics_indicator = function(_, _, diag)
               local icons = {
                 Error = " ",
-                Warn  = " ",
-                Hint  = " ",
-                Info  = " ",
+                Warn = " ",
+                Hint = " ",
+                Info = " ",
               }
               local ret = (diag.error and icons.Error .. diag.error .. " " or "")
-                  .. (diag.warning and icons.Warn .. diag.warning or "")
+                .. (diag.warning and icons.Warn .. diag.warning or "")
               return vim.trim(ret)
             end,
             offsets = {
               {
                 filetype = "snacks_layout_box",
-              }
-            }
-          }
-        })
+              },
+            },
+          },
+        }
+      )
     end,
   },
   {
@@ -153,7 +158,9 @@ return {
             {
               require("lazy.status").updates,
               cond = require("lazy.status").has_updates,
-              color = function() return { fg = Snacks.util.color("Special") } end,
+              color = function()
+                return { fg = Snacks.util.color("Special") }
+              end,
             },
             {
               "diff",
@@ -175,7 +182,7 @@ return {
             },
           },
           lualine_y = {
-            { "progress", separator = " ",                  padding = { left = 1, right = 0 } },
+            { "progress", separator = " ", padding = { left = 1, right = 0 } },
             { "location", padding = { left = 0, right = 1 } },
           },
           lualine_z = {
@@ -304,5 +311,5 @@ return {
       end
       require("noice").setup(opts)
     end,
-  }
+  },
 }

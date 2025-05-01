@@ -10,45 +10,52 @@ return {
       },
 
       appearance = {
-        nerd_font_variant = "mono"
+        nerd_font_variant = "mono",
       },
 
       completion = {
         accept = {
-          auto_brackets = { enabled = true }
+          auto_brackets = { enabled = true },
         },
         documentation = {
           auto_show = true,
           auto_show_delay_ms = 200,
           window = {
-            border = "rounded"
-          }
+            border = "rounded",
+          },
         },
         menu = {
           border = "rounded",
           draw = {
-            treesitter = { "lsp" }
-          }
+            treesitter = { "lsp" },
+          },
         },
         list = {
           window = {
-            border = "rounded"
-          }
+            border = "rounded",
+          },
         },
       },
 
       sources = {
-        default = { "lsp", "path", "snippets", "buffer" },
+        default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+        providers = {
+          lazydev = {
+            name = "LazyDev",
+            module = "lazydev.integrations.blink",
+            -- make lazydev completions top priority (see `:h blink.cmp`)
+            score_offset = 100,
+          },
+        },
       },
 
-      fuzzy = { implementation = "prefer_rust_with_warning" }
+      fuzzy = { implementation = "prefer_rust_with_warning" },
     },
-    opts_extend = { "sources.default" }
+    opts_extend = { "sources.default" },
   },
   {
-    'numToStr/Comment.nvim',
-    opts = {
-    }
+    "numToStr/Comment.nvim",
+    opts = {},
   },
   {
     "nvim-treesitter/nvim-treesitter",
@@ -57,32 +64,35 @@ return {
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     keys = {
       { "<c-space>", desc = "Increment Selection" },
-      { "<bs>",      desc = "Decrement Selection", mode = "x" },
+      { "<bs>", desc = "Decrement Selection", mode = "x" },
     },
     config = function()
-      require("nvim-treesitter.configs").setup({
-        highlight = { enable = true },
-        indent = { enable = true },
-        ensure_installed = {},
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            init_selection = "<C-space>",
-            node_incremental = "<C-space>",
-            scope_incremental = false,
-            node_decremental = "<bs>",
-          },
-        },
-        textobjects = {
-          move = {
+      require("nvim-treesitter.configs").setup(
+        ---@diagnostic disable: missing-fields
+        {
+          highlight = { enable = true },
+          indent = { enable = true },
+          ensure_installed = {},
+          incremental_selection = {
             enable = true,
-            goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer", ["]a"] = "@parameter.inner" },
-            goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer", ["]A"] = "@parameter.inner" },
-            goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer", ["[a"] = "@parameter.inner" },
-            goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer", ["[A"] = "@parameter.inner" },
+            keymaps = {
+              init_selection = "<C-space>",
+              node_incremental = "<C-space>",
+              scope_incremental = false,
+              node_decremental = "<bs>",
+            },
           },
-        },
-      })
+          textobjects = {
+            move = {
+              enable = true,
+              goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer", ["]a"] = "@parameter.inner" },
+              goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer", ["]A"] = "@parameter.inner" },
+              goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer", ["[a"] = "@parameter.inner" },
+              goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer", ["[A"] = "@parameter.inner" },
+            },
+          },
+        }
+      )
     end,
   },
   {
@@ -124,7 +134,7 @@ return {
         typescript = { "biome" },
         typescriptreact = { "biome" },
         javascript = { "biome" },
-        python = { "ruff" }
+        python = { "ruff" },
       },
       format_on_save = {
         timeout_ms = 500,
