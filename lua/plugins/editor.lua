@@ -135,6 +135,8 @@ return {
         typescriptreact = { "biome" },
         javascript = { "biome" },
         python = { "ruff" },
+        jsonc = { "biome" },
+        json = { "biome" },
       },
       format_on_save = {
         timeout_ms = 500,
