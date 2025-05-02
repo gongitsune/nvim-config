@@ -64,11 +64,11 @@ return {
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     keys = {
       { "<c-space>", desc = "Increment Selection" },
-      { "<bs>", desc = "Decrement Selection", mode = "x" },
+      { "<bs>",      desc = "Decrement Selection", mode = "x" },
     },
     config = function()
       require("nvim-treesitter.configs").setup(
-        ---@diagnostic disable: missing-fields
+      ---@diagnostic disable: missing-fields
         {
           highlight = { enable = true },
           indent = { enable = true },
@@ -137,6 +137,7 @@ return {
         python = { "ruff" },
         jsonc = { "biome" },
         json = { "biome" },
+        css = { "biome" }
       },
       format_on_save = {
         timeout_ms = 500,
