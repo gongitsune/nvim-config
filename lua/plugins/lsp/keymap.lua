@@ -34,20 +34,19 @@ function M.get()
       has = "signatureHelp",
     },
     {
-      "<c-k>",
-      function()
-        return vim.lsp.buf.signature_help()
-      end,
-      mode = "i",
-      desc = "Signature Help",
-      has = "signatureHelp",
-    },
-    {
       "<leader>la",
       require("actions-preview").code_actions,
       desc = "Code Action",
       mode = { "n", "v" },
       has = "codeAction",
+    },
+    {
+      "<leader>ld",
+      function()
+        vim.diagnostic.open_float({ border = "rounded" })
+      end,
+      desc = "Hover diagnostic",
+      mode = { "n" },
     },
     { "<leader>lc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "v" }, has = "codeLens" },
     { "<leader>lC", vim.lsp.codelens.refresh, desc = "Refresh & Display Codelens", mode = { "n" }, has = "codeLens" },
