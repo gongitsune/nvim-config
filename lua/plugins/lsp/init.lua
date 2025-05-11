@@ -1,6 +1,7 @@
 return {
   {
     "williamboman/mason.nvim",
+    lazy = false,
     cmd = "Mason",
     opts = {
       ui = {
@@ -15,6 +16,12 @@ return {
   },
   {
     "williamboman/mason-lspconfig.nvim",
+    event = { "BufReadPost", "BufWritePost", "BufNewFile" },
+    dependencies = {
+      {
+        "neovim/nvim-lspconfig",
+      },
+    },
     opts = {
       ensure_installed = {
         "lua_ls",
@@ -22,9 +29,6 @@ return {
         "tinymist",
       },
     },
-  },
-  {
-    "neovim/nvim-lspconfig",
   },
   {
     "folke/lazydev.nvim",

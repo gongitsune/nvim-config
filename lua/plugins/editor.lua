@@ -1,5 +1,8 @@
 return {
   {
+    "L3MON4D3/LuaSnip",
+  },
+  {
     "saghen/blink.cmp",
     build = "cargo build --release",
     ---@module "blink.cmp"
@@ -8,11 +11,9 @@ return {
       keymap = {
         preset = "default",
       },
-
       appearance = {
         nerd_font_variant = "mono",
       },
-
       completion = {
         accept = {
           auto_brackets = { enabled = true },
@@ -20,9 +21,6 @@ return {
         documentation = {
           auto_show = true,
           auto_show_delay_ms = 200,
-          window = {
-            border = "rounded",
-          },
         },
         menu = {
           border = "rounded",
@@ -36,7 +34,8 @@ return {
           },
         },
       },
-
+      signature = { enabled = true },
+      snippets = { preset = "luasnip" },
       sources = {
         default = { "lazydev", "lsp", "path", "snippets", "buffer" },
         providers = {
@@ -48,7 +47,6 @@ return {
           },
         },
       },
-
       fuzzy = { implementation = "prefer_rust_with_warning" },
     },
     opts_extend = { "sources.default" },
@@ -64,11 +62,11 @@ return {
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     keys = {
       { "<c-space>", desc = "Increment Selection" },
-      { "<bs>",      desc = "Decrement Selection", mode = "x" },
+      { "<bs>", desc = "Decrement Selection", mode = "x" },
     },
     config = function()
       require("nvim-treesitter.configs").setup(
-      ---@diagnostic disable: missing-fields
+        ---@diagnostic disable: missing-fields
         {
           highlight = { enable = true },
           indent = { enable = true },
@@ -137,7 +135,7 @@ return {
         python = { "ruff" },
         jsonc = { "biome" },
         json = { "biome" },
-        css = { "biome" }
+        css = { "biome" },
       },
       format_on_save = {
         timeout_ms = 500,
