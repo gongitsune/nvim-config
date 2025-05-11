@@ -21,6 +21,9 @@ return {
         documentation = {
           auto_show = true,
           auto_show_delay_ms = 200,
+          window = {
+            border = "rounded",
+          },
         },
         menu = {
           border = "rounded",
@@ -34,7 +37,12 @@ return {
           },
         },
       },
-      signature = { enabled = true },
+      signature = {
+        enabled = true,
+        window = {
+          border = "rounded",
+        },
+      },
       snippets = { preset = "luasnip" },
       sources = {
         default = { "lazydev", "lsp", "path", "snippets", "buffer" },

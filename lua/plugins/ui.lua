@@ -1,5 +1,11 @@
 return {
   {
+    "aznhe21/actions-preview.nvim",
+    opts = {
+      backend = { "snacks" },
+    },
+  },
+  {
     "stevearc/oil.nvim",
     lazy = false,
     keys = {

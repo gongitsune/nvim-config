@@ -7,7 +7,7 @@ function M.get()
 
   M._keys = {
     {
-      "<leader>cl",
+      "<leader>ll",
       function()
         Snacks.picker.lsp_config()
       end,
@@ -42,11 +42,17 @@ function M.get()
       desc = "Signature Help",
       has = "signatureHelp",
     },
-    { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
-    { "<leader>cc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "v" }, has = "codeLens" },
-    { "<leader>cC", vim.lsp.codelens.refresh, desc = "Refresh & Display Codelens", mode = { "n" }, has = "codeLens" },
     {
-      "<leader>cR",
+      "<leader>la",
+      require("actions-preview").code_actions,
+      desc = "Code Action",
+      mode = { "n", "v" },
+      has = "codeAction",
+    },
+    { "<leader>lc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "v" }, has = "codeLens" },
+    { "<leader>lC", vim.lsp.codelens.refresh, desc = "Refresh & Display Codelens", mode = { "n" }, has = "codeLens" },
+    {
+      "<leader>lR",
       function()
         Snacks.rename.rename_file()
       end,
@@ -54,8 +60,7 @@ function M.get()
       mode = { "n" },
       has = { "workspace/didRenameFiles", "workspace/willRenameFiles" },
     },
-    { "<leader>cr", vim.lsp.buf.rename, desc = "Rename", has = "rename" },
-    { "<leader>cA", LazyVim.lsp.action.source, desc = "Source Action", has = "codeAction" },
+    { "<leader>lr", vim.lsp.buf.rename, desc = "Rename", has = "rename" },
     {
       "]]",
       function()
@@ -101,6 +106,49 @@ function M.get()
       end,
     },
   }
+
+  return M._keys
+end
+
+---@param buffer integer?
+---@param method string|string[]
+function M.has(buffer, method)
+  if type(method) == "table" then
+    for _, m in ipairs(method) do
+      if M.has(buffer, m) then
+        return true
+      end
+    end
+    return false
+  end
+  method = method:find("/") and method or "textDocument/" .. method
+  local clients = vim.lsp.get_clients({ bufnr = buffer })
+  for _, client in ipairs(clients) do
+    if client:supports_method(method, buffer) then
+      return true
+    end
+  end
+  return false
+end
+
+---@param buffer integer
+function M.on_attach(buffer)
+  local wk = require("which-key")
+
+  for _, keys in pairs(M.get()) do
+    local has = not keys.has or M.has(buffer, keys.has)
+    local cond = not (keys.cond == false or ((type(keys.cond) == "function") and not keys.cond()))
+
+    if has and cond then
+      wk.add({
+        keys[1],
+        keys[2],
+        desc = keys.desc,
+        mode = keys.mode,
+        buffer = buffer,
+      })
+    end
+  end
 end
 
 return M
