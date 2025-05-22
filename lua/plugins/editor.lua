@@ -1,6 +1,19 @@
 return {
   {
+    "stevearc/overseer.nvim",
+    keys = {
+      { "<space>r", "<CMD>OverseerRun<CR>" },
+      { "<space>R", "<CMD>OverseerToggle<CR>" },
+    },
+    opts = {},
+  },
+  {
     "L3MON4D3/LuaSnip",
+  },
+  {
+    "windwp/nvim-ts-autotag",
+    event = { "BufReadPost", "BufWritePost", "BufNewFile" },
+    opts = {},
   },
   {
     "saghen/blink.cmp",
