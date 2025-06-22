@@ -22,7 +22,8 @@ return {
     ---@type blink.cmp.Config
     opts = {
       keymap = {
-        preset = "default",
+        preset = "enter",
+        ["<C-y>"] = { "select_and_accept" },
       },
       appearance = {
         nerd_font_variant = "mono",
@@ -48,6 +49,9 @@ return {
           window = {
             border = "rounded",
           },
+          selection = {
+            auto_insert = false,
+          }
         },
       },
       signature = {
@@ -83,11 +87,11 @@ return {
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     keys = {
       { "<c-space>", desc = "Increment Selection" },
-      { "<bs>", desc = "Decrement Selection", mode = "x" },
+      { "<bs>",      desc = "Decrement Selection", mode = "x" },
     },
     config = function()
       require("nvim-treesitter.configs").setup(
-        ---@diagnostic disable: missing-fields
+      ---@diagnostic disable: missing-fields
         {
           highlight = { enable = true },
           indent = { enable = true },

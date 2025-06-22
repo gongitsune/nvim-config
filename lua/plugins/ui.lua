@@ -45,8 +45,8 @@ return {
     event = "VeryLazy",
     config = function()
       require("bufferline").setup(
-        ---@module "bufferline",
-        ---@type bufferline.UserConfig
+      ---@module "bufferline",
+      ---@type bufferline.UserConfig
         {
           highlights = require("catppuccin.groups.integrations.bufferline").get(),
           options = {
@@ -67,7 +67,7 @@ return {
                 Info = " ",
               }
               local ret = (diag.error and icons.Error .. diag.error .. " " or "")
-                .. (diag.warning and icons.Warn .. diag.warning or "")
+                  .. (diag.warning and icons.Warn .. diag.warning or "")
               return vim.trim(ret)
             end,
             offsets = {
@@ -188,7 +188,7 @@ return {
             },
           },
           lualine_y = {
-            { "progress", separator = " ", padding = { left = 1, right = 0 } },
+            { "progress", separator = " ",                  padding = { left = 1, right = 0 } },
             { "location", padding = { left = 0, right = 1 } },
           },
           lualine_z = {
