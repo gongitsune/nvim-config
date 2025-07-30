@@ -125,9 +125,9 @@ return {
       require("lint").linters_by_ft = {
         lua = { "selene" },
         cpp = { "clangtidy" },
-        typescript = { "biomejs" },
-        typescriptreact = { "biomejs" },
-        javascript = { "biomejs" },
+        typescript = { "oxlint" },
+        typescriptreact = { "oxlint" },
+        javascript = { "oxlint" },
         json = { "biomejs" },
         python = { "ruff" },
       }
