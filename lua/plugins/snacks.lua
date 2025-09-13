@@ -87,7 +87,7 @@ return {
     {
       "<leader>t",
       function()
-        Snacks.terminal.toggle()
+        Snacks.terminal.toggle("fish")
       end,
       desc = "Toggle terminal",
     },
