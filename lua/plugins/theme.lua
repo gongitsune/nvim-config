@@ -8,21 +8,7 @@ return {
     opts = {
       flavour = "mocha",
       transparent_background = true,
-      integrations = {
-        blink_cmp = true,
-        gitsigns = true,
-        treesitter = true,
-        mini = {
-          enabled = true,
-        },
-        mason = true,
-        which_key = true,
-        snacks = {
-          enabled = true,
-          indent_scope_color = "lavender",
-        },
-        lsp_trouble = true,
-      },
+      auto_integrations = true
     },
   },
 }
