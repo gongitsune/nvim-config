@@ -48,7 +48,7 @@ return {
       ---@module "bufferline",
       ---@type bufferline.UserConfig
         {
-          highlights = require("catppuccin.groups.integrations.bufferline").get_theme(),
+          highlights = require("catppuccin.special.bufferline").get_theme(),
           options = {
             close_command = function(n)
               Snacks.bufdelete(n)
