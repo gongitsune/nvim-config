@@ -61,7 +61,6 @@ local options = {
     git_worktrees = nil, -- enable git integration for detached worktrees (specify a table where each entry is of the form { toplevel = vim.env.HOME, gitdir=vim.env.HOME .. "/.dotfiles" })
     loaded_netrw = 1, -- disable netrw
     loaded_netrwPlugin = 1, -- disable netrw plugin
-    copilot_no_tab_map = true, -- disable copilot.vim tab mappings
   },
   o = {
     winborder = "rounded", -- set border style for floating windows
