@@ -7,7 +7,7 @@ return {
       suggestion = {
         auto_trigger = true,
         keymap = {
-          accept = vim.fn.has("unix") == 1 and "<M-l>" or "¬"
+          accept = vim.fn.has("mac") == 0 and "<M-l>" or "¬"
         }
       }
     }
