@@ -35,7 +35,7 @@ function M.get()
     },
     {
       "<leader>la",
-      require("tiny-code-action").code_actions,
+      require("tiny-code-action").code_action,
       desc = "Code Action",
       mode = { "n", "v" },
       has = "codeAction",
