@@ -13,11 +13,11 @@ function M.get()
       end,
       desc = "Lsp Info",
     },
-    { "gd", vim.lsp.buf.definition, desc = "Goto Definition", has = "definition" },
-    { "gr", vim.lsp.buf.references, desc = "References", nowait = true },
-    { "gI", vim.lsp.buf.implementation, desc = "Goto Implementation" },
+    { "gd", vim.lsp.buf.definition,      desc = "Goto Definition",       has = "definition" },
+    { "gr", vim.lsp.buf.references,      desc = "References",            nowait = true },
+    { "gI", vim.lsp.buf.implementation,  desc = "Goto Implementation" },
     { "gy", vim.lsp.buf.type_definition, desc = "Goto T[y]pe Definition" },
-    { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
+    { "gD", vim.lsp.buf.declaration,     desc = "Goto Declaration" },
     {
       "K",
       function()
@@ -35,7 +35,7 @@ function M.get()
     },
     {
       "<leader>la",
-      require("actions-preview").code_actions,
+      require("tiny-code-action").code_actions,
       desc = "Code Action",
       mode = { "n", "v" },
       has = "codeAction",
@@ -48,8 +48,8 @@ function M.get()
       desc = "Hover diagnostic",
       mode = { "n" },
     },
-    { "<leader>lc", vim.lsp.codelens.run, desc = "Run Codelens", mode = { "n", "v" }, has = "codeLens" },
-    { "<leader>lC", vim.lsp.codelens.refresh, desc = "Refresh & Display Codelens", mode = { "n" }, has = "codeLens" },
+    { "<leader>lc", vim.lsp.codelens.run,     desc = "Run Codelens",               mode = { "n", "v" }, has = "codeLens" },
+    { "<leader>lC", vim.lsp.codelens.refresh, desc = "Refresh & Display Codelens", mode = { "n" },      has = "codeLens" },
     {
       "<leader>lR",
       function()

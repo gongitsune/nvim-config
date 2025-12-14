@@ -1,8 +1,18 @@
 return {
   {
-    "aznhe21/actions-preview.nvim",
+    "rachartier/tiny-code-action.nvim",
+    dependencies = {
+      { "nvim-lua/plenary.nvim" },
+      {
+        "folke/snacks.nvim",
+        opts = {
+          terminal = {},
+        }
+      }
+    },
+    event = "LspAttach",
     opts = {
-      backend = { "snacks" },
+      picker = "snacks"
     },
   },
   {
@@ -202,7 +212,7 @@ return {
 
       -- do not add trouble symbols if aerial is enabled
       -- And allow it to be overriden for some buffer types (see autocmds)
-      if vim.g.trouble_lualine and LazyVim.has("trouble.nvim") then
+      if vim.g.trouble_lualine then
         local trouble = require("trouble")
         local symbols = trouble.statusline({
           mode = "symbols",
