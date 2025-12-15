@@ -28,45 +28,39 @@ return {
     },
   },
   {
-    "A7Lavinraj/fyler.nvim",
-    dependencies = { "nvim-mini/mini.icons" },
-    branch = "stable", -- Use stable branch for production
-    lazy = false,      -- Necessary for `default_explorer` to work properly
-    ---@type FylerConfig
-    ---@diagnostic disable: missing-fields
-    opts = {
-      views = {
-        finder = {
-          win = {
-            kinds = {
-              split_left_most = {
-                width = "15%",
-              },
-            }
-          }
-        }
-      }
-    },
+    "stevearc/oil.nvim",
+    lazy = false,
     keys = {
       {
         "<leader>e",
         function()
-          if vim.bo.filetype == "fyler" then
+          if vim.bo.filetype == "oil" then
             return
           end
-          require("fyler").open({ kind = "float" })
-        end
-      }, {
-      "<leader>E",
-      function()
-        if vim.bo.filetype == "fyler" then
-          return
-        end
-        require("fyler").open({ kind = "split_left_most" })
-      end,
-      desc = "Open File Explorer in New Tab",
-    }
-    }
+
+          require("oil").open_float(
+            nil,
+            ---@type oil.OpenOpts
+            { preview = { vertical = true } }
+          )
+        end,
+        desc = "Toggle oil float",
+      },
+    },
+    opts = function()
+      ---@module 'oil'
+      ---@type oil.SetupOpts
+      return {
+        keymaps = {
+          ["q"] = "actions.close",
+        },
+        float = {
+          max_width = math.floor(vim.o.columns * 0.8),
+          max_height = math.floor(vim.o.lines * 0.8),
+        },
+        default_file_explorer = true,
+      }
+    end,
   },
   {
     "akinsho/bufferline.nvim",
