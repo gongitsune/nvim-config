@@ -5,7 +5,6 @@ return {
   ---@type snacks.Config
   opts = {
     dashboard = {},
-    explorer = {},
     picker = {
       sources = {
         explorer = {},
@@ -127,13 +126,6 @@ return {
         Snacks.picker.notifications()
       end,
       desc = "Notification History",
-    },
-    {
-      "<leader>E",
-      function()
-        Snacks.explorer()
-      end,
-      desc = "File Explorer",
     },
     -- find
     {
