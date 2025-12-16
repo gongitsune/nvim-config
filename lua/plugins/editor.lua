@@ -46,11 +46,13 @@ return {
           },
         },
         list = {
-          window = {
-            border = "rounded",
-          },
           selection = {
             auto_insert = false,
+          },
+          appearance = {
+            window = {
+              border = "rounded"
+            }
           }
         },
       },
