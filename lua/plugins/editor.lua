@@ -152,38 +152,39 @@ return {
     build = ":TSUpdate",
     event = "VeryLazy",
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
-    keys = {
-      { "<c-space>", desc = "Increment Selection" },
-      { "<bs>",      desc = "Decrement Selection", mode = "x" },
-    },
     config = function()
-      require("nvim-treesitter.configs").setup(
-      ---@diagnostic disable: missing-fields
-        {
-          highlight = { enable = true },
-          indent = { enable = true },
-          ensure_installed = {},
-          incremental_selection = {
-            enable = true,
-            keymaps = {
-              init_selection = "<C-space>",
-              node_incremental = "<C-space>",
-              scope_incremental = false,
-              node_decremental = "<bs>",
-            },
-          },
-          textobjects = {
-            move = {
-              enable = true,
-              goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer", ["]a"] = "@parameter.inner" },
-              goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer", ["]A"] = "@parameter.inner" },
-              goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer", ["[a"] = "@parameter.inner" },
-              goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer", ["[A"] = "@parameter.inner" },
-            },
-          },
-        }
-      )
+      require("nvim-treesitter").setup()
+      local treesitter = require("utils.treesitter")
+
+      vim.api.nvim_create_autocmd("FileType", {
+        group = vim.api.nvim_create_augroup("vim-treesitter-start", {}),
+        callback = function(ev)
+          local ft, lang = ev.match, vim.treesitter.language.get_lang(ev.match)
+          if not treesitter.have(ft) then
+            return
+          end
+
+          if treesitter.have(ft, "highlights") then
+            vim.treesitter.start()
+          end
+
+          if treesitter.have(ft, "indent") then
+            vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+          end
+          if treesitter.have(ft, "folding") then
+            vim.wo.foldmethod = "expr"
+            vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+          end
+        end,
+      })
     end,
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    event = "VeryLazy",
+    keys = {
+      { "[c", mode = "n", function() require("treesitter-context").go_to_context(vim.v.count1) end, desc = "Go To Context" },
+    }
   },
   {
     "mfussenegger/nvim-lint",
