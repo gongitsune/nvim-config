@@ -159,7 +159,7 @@ return {
       vim.api.nvim_create_autocmd("FileType", {
         group = vim.api.nvim_create_augroup("vim-treesitter-start", {}),
         callback = function(ev)
-          local ft, lang = ev.match, vim.treesitter.language.get_lang(ev.match)
+          local ft, _ = ev.match, vim.treesitter.language.get_lang(ev.match)
           if not treesitter.have(ft) then
             return
           end
