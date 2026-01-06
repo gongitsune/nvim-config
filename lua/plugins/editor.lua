@@ -151,27 +151,29 @@ return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     event = "VeryLazy",
+    branch = "main",
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     config = function()
       require("nvim-treesitter").setup()
-      local treesitter = require("utils.treesitter")
+      local ts_utils = require("utils.treesitter")
+      ts_utils.get_installed(true)
 
       vim.api.nvim_create_autocmd("FileType", {
         group = vim.api.nvim_create_augroup("vim-treesitter-start", {}),
         callback = function(ev)
           local ft, _ = ev.match, vim.treesitter.language.get_lang(ev.match)
-          if not treesitter.have(ft) then
+          if not ts_utils.have(ft) then
             return
           end
 
-          if treesitter.have(ft, "highlights") then
+          if ts_utils.have(ft, "highlights") then
             vim.treesitter.start()
           end
 
-          if treesitter.have(ft, "indent") then
+          if ts_utils.have(ft, "indent") then
             vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
           end
-          if treesitter.have(ft, "folding") then
+          if ts_utils.have(ft, "folding") then
             vim.wo.foldmethod = "expr"
             vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
           end
