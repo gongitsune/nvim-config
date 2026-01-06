@@ -40,5 +40,5 @@ wk.add({
 
 wk.add({
   mode = { "t" },
-  { "jk", "<C-\\><C-n>", desc = "Exit terminal mode" },
+  { "JK", "<C-\\><C-n>", desc = "Exit terminal mode" },
 })
