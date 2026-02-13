@@ -10,6 +10,7 @@ return {
       transparent_background = true,
       float = {
         transparent = true,
+        solid = false,
       },
       auto_integrations = true
     },

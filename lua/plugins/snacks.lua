@@ -2,6 +2,7 @@ return {
   "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
+  ---@module "snacks"
   ---@type snacks.Config
   opts = {
     dashboard = {},
@@ -9,6 +10,8 @@ return {
     picker = {
       sources = {
         explorer = {},
+        gh_issue = {},
+        gh_pr = {},
       },
       matcher = {
         cwd_bonus = true,
@@ -38,6 +41,7 @@ return {
         border = "rounded",
       },
     },
+    image = {},
     statuscolumn = {},
     scratch = {},
     indent = { enabled = true },
@@ -47,6 +51,8 @@ return {
     words = { enabled = true },
     bigfile = { enabled = true },
     quickfile = { enabled = true },
+    gh = { enabled = true },
+    gitbrowse = { enabled = true },
   },
   keys = {
     -- Scratch
@@ -72,6 +78,15 @@ return {
         Snacks.lazygit()
       end,
       desc = "Lazygit",
+    },
+
+    -- Git browse
+    {
+      "<leader>gx",
+      function()
+        Snacks.gitbrowse()
+      end,
+      desc = "Git Browse",
     },
 
     -- Zen
@@ -227,6 +242,26 @@ return {
         Snacks.picker.git_log_file()
       end,
       desc = "Git Log File",
+    },
+    {
+      "<leader>gi",
+      function() Snacks.picker.gh_issue() end,
+      desc = "GitHub Issues (open)"
+    },
+    {
+      "<leader>gI",
+      function() Snacks.picker.gh_issue({ state = "all" }) end,
+      desc = "GitHub Issues (all)"
+    },
+    {
+      "<leader>gp",
+      function() Snacks.picker.gh_pr() end,
+      desc = "GitHub Pull Requests (open)"
+    },
+    {
+      "<leader>gP",
+      function() Snacks.picker.gh_pr({ state = "all" }) end,
+      desc = "GitHub Pull Requests (all)"
     },
     -- Grep
     {
