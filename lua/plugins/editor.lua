@@ -18,12 +18,12 @@ return {
   {
     "saghen/blink.cmp",
     build = "cargo build --release",
-    ---@module "blink.cmp"
+    ---@module "blink-cmp"
     ---@type blink.cmp.Config
     opts = {
       keymap = {
-        preset = "enter",
-        ["<C-y>"] = { "select_and_accept" },
+        preset = "default",
+        ['<C-k>'] = {},
       },
       appearance = {
         nerd_font_variant = "mono",
@@ -48,6 +48,7 @@ return {
         list = {
           selection = {
             auto_insert = false,
+            preselect = false,
           }
         },
       },
