@@ -14,19 +14,10 @@ wk.add({
   { "\\",        "<cmd>split<cr>",        desc = "Horizontal Split" },
   { "]b",        "<cmd>bnext<cr>",        desc = "Next buffers" },
   { "[b",        "<cmd>bprev<cr>",        desc = "Previous buffers" },
-  {
-    "<leader>bc",
-    function()
-      Snacks.bufdelete.delete({
-        buf = vim.api.nvim_get_current_buf(),
-      })
-    end,
-    desc = "Delete current buffer",
-  },
-  { "<C-h>", "<C-w>h", desc = "Move to left split" },
-  { "<C-j>", "<C-w>j", desc = "Move to bottom split" },
-  { "<C-k>", "<C-w>k", desc = "Move to top split" },
-  { "<C-l>", "<C-w>l", desc = "Move to right split" },
+  { "<C-h>",     "<C-w>h",                desc = "Move to left split" },
+  { "<C-j>",     "<C-w>j",                desc = "Move to bottom split" },
+  { "<C-k>",     "<C-w>k",                desc = "Move to top split" },
+  { "<C-l>",     "<C-w>l",                desc = "Move to right split" },
 })
 
 wk.add({
