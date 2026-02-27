@@ -1,9 +1,6 @@
 vim.lsp.config("*", {
   capabilities = require("blink.cmp").get_lsp_capabilities(),
 })
-if vim.fn.has("mac") then
-  vim.lsp.enable("sourcekit")
-end
 
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
