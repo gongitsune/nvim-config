@@ -196,9 +196,9 @@ return {
       require("lint").linters_by_ft = {
         lua = { "selene" },
         cpp = { "clangtidy" },
-        typescript = { "biomejs" },
-        typescriptreact = { "biomejs" },
-        javascript = { "biomejs" },
+        typescript = { "oxlint" },
+        typescriptreact = { "oxlint" },
+        javascript = { "oxlint" },
         json = { "biomejs" },
         python = { "ruff" },
         html = { "biomejs" }
@@ -226,13 +226,14 @@ return {
       formatters_by_ft = {
         lua = { "stylua" },
         cpp = { "clang-format" },
-        typescript = { "biome-check" },
-        typescriptreact = { "biome-check" },
-        javascript = { "biome-check" },
+        typescript = { "oxfmt", "oxlint" },
+        typescriptreact = { "oxfmt", "oxlint" },
+        javascript = { "oxfmt", "oxlint" },
         python = { "ruff" },
-        jsonc = { "biome-check" },
-        json = { "biome-check" },
-        css = { "biome-check" },
+        jsonc = { "oxfmt" },
+        json = { "oxfmt" },
+        css = { "oxfmt" },
+        html = { "oxfmt" },
       },
       format_on_save = {
         timeout_ms = 500,

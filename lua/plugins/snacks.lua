@@ -41,7 +41,6 @@ return {
         border = "rounded",
       },
     },
-    image = {},
     statuscolumn = {},
     scratch = {},
     indent = { enabled = true },
