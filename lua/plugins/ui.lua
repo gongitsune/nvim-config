@@ -16,17 +16,6 @@ return {
     },
   },
   {
-    "gongitsune/buflist.nvim",
-    opts = {},
-    keys = {
-      {
-        "<leader>b",
-        function() require("buflist").open() end,
-        desc = "Buflist",
-      },
-    },
-  },
-  {
     "rachartier/tiny-inline-diagnostic.nvim",
     event = "VeryLazy",
     priority = 1000,

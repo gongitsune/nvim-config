@@ -151,7 +151,7 @@ return {
     },
     -- find
     {
-      "<leader>fb",
+      "<leader>b",
       function()
         Snacks.picker.buffers()
       end,
