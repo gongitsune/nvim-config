@@ -14,4 +14,4 @@ for _, source in ipairs({
 end
 
 -- apply colorscheme
-vim.cmd.colorscheme("catppuccin")
+vim.cmd.colorscheme("catppuccin-nvim")
