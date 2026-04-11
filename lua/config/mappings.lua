@@ -18,6 +18,7 @@ wk.add({
   { "<C-j>",     "<C-w>j",                desc = "Move to bottom split" },
   { "<C-k>",     "<C-w>k",                desc = "Move to top split" },
   { "<C-l>",     "<C-w>l",                desc = "Move to right split" },
+  { "<Esc>",     "<cmd>noh<cr>",          desc = "Clear highlights" },
   {
     "<leader>bc",
     function() Snacks.bufdelete.delete() end,
