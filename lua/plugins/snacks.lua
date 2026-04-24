@@ -52,6 +52,12 @@ return {
     quickfile = { enabled = true },
     gh = { enabled = true },
     gitbrowse = { enabled = true },
+    image = {
+      enabled = true,
+      doc = {
+        enabled = false
+      }
+    }
   },
   keys = {
     -- Scratch

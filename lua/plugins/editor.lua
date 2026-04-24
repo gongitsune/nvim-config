@@ -15,10 +15,17 @@ return {
     event = { "BufReadPost", "BufWritePost", "BufNewFile" },
     opts = {},
   },
-  { "saghen/blink.lib" },
   {
     "saghen/blink.cmp",
-    build = "cargo build --release",
+    dependencies = {
+      "saghen/blink.lib",
+    },
+    build = function()
+      -- build the fuzzy matcher, wait up to 60 seconds
+      -- you can use `gb` in `:Lazy` to rebuild the plugin as needed
+      ---@diagnostic disable-next-line: undefined-field
+      require('blink.cmp').build():wait(60000)
+    end,
     ---@module "blink-cmp"
     ---@type blink.cmp.Config
     opts = {
