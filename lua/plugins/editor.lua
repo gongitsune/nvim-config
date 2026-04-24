@@ -15,6 +15,7 @@ return {
     event = { "BufReadPost", "BufWritePost", "BufNewFile" },
     opts = {},
   },
+  { "saghen/blink.lib" },
   {
     "saghen/blink.cmp",
     build = "cargo build --release",

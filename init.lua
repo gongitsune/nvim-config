@@ -7,7 +7,7 @@ for _, source in ipairs({
 }) do
   local status_ok, fault = pcall(require, source)
   if not status_ok then
-    vim.api.nvim_echo({ string.format("Failed to load %s\n\n%s", source, fault) }, true, {
+    vim.api.nvim_echo({ { string.format("Failed to load %s\n\n%s", source, fault) } }, true, {
       err = true,
     })
   end
