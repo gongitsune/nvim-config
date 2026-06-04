@@ -21,10 +21,8 @@ return {
       "saghen/blink.lib",
     },
     build = function()
-      -- build the fuzzy matcher, wait up to 60 seconds
-      -- you can use `gb` in `:Lazy` to rebuild the plugin as needed
       ---@diagnostic disable-next-line: undefined-field
-      require('blink.cmp').build():wait(60000)
+      require('blink.cmp').build():pwait()
     end,
     ---@module "blink-cmp"
     ---@type blink.cmp.Config
@@ -78,7 +76,7 @@ return {
           },
         },
       },
-      fuzzy = { implementation = "prefer_rust_with_warning" },
+      fuzzy = { implementation = "rust" },
     },
     opts_extend = { "sources.default" },
   },
