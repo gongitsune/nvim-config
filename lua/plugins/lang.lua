@@ -12,5 +12,12 @@ return {
   },
   {
     "b0o/schemastore.nvim",
+  },
+  {
+    "qvalentin/helm-ls.nvim",
+    ft = "helm",
+    opts = {
+      -- leave empty or see below
+    },
   }
 }
