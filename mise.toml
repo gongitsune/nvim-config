@@ -1,0 +1,4 @@
+[tools]
+"github:Kampfkarren/selene" = "latest"
+lua-language-server = "latest"
+stylua = "latest"
