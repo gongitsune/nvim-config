@@ -26,15 +26,15 @@ nmap_leader("r", "<Cmd>restart<CR>", "Restart")
 
 vim.keymap.set("n", "<Esc>", "<Cmd>noh<Cr>", { desc = "Clear hilight" })
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left split" })
-vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to up split" })
-vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Move to down split" })
+vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to down split" })
+vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Move to up split" })
 vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right split" })
 
 vim.keymap.set("i", "jk", "<Esc>", { desc = "Escape insert mode" })
 vim.keymap.set("i", "<C-h>", "<Left>", { desc = "Move sursor left" })
 vim.keymap.set("i", "<C-j>", "<Down>", { desc = "Move sursor Down" })
-vim.keymap.set("i", "<C-k>", "<Right>", { desc = "Move sursor Right" })
-vim.keymap.set("i", "<C-l>", "<Up>", { desc = "Move sursor Up" })
+vim.keymap.set("i", "<C-k>", "<Up>", { desc = "Move sursor Right" })
+vim.keymap.set("i", "<C-l>", "<Right>", { desc = "Move sursor Up" })
 
 vim.keymap.set("t", "JK", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 

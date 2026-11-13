@@ -15,6 +15,8 @@ now_if_args(function()
         "https://github.com/stevearc/conform.nvim",
         "https://github.com/saghen/blink.lib",
         "https://github.com/saghen/blink.cmp",
+        "https://github.com/zbirenbaum/copilot.lua",
+        "https://github.com/copilotlsp-nvim/copilot-lsp",
     })
 
     -- Configure tree-sitter
@@ -69,4 +71,19 @@ now_if_args(function()
     local cmp = require("blink.cmp")
     cmp.build():pwait()
     cmp.setup()
+
+    -- Copilot setup
+    require("copilot").setup({
+        nes = {
+            enabled = true,
+            keymap = {
+                accept_and_goto = "<Leader>p",
+                accept = false,
+                dismiss = "<Esc>",
+            },
+        },
+        suggestion = {
+            auto_trigger = true,
+        },
+    })
 end)
