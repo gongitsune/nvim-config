@@ -17,6 +17,8 @@ now_if_args(function()
         "https://github.com/saghen/blink.cmp",
         "https://github.com/zbirenbaum/copilot.lua",
         "https://github.com/copilotlsp-nvim/copilot-lsp",
+        "https://github.com/lewis6991/gitsigns.nvim",
+        "https://github.com/saghen/blink.indent",
     })
 
     -- Configure tree-sitter
@@ -86,4 +88,7 @@ now_if_args(function()
             auto_trigger = true,
         },
     })
+
+    -- Gitsigns setup
+    require("gitsigns").setup()
 end)
