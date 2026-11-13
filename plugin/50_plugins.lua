@@ -1,5 +1,5 @@
 local add = vim.pack.add
-local now_if_args, later = Config.now_if_args, Config.later
+local now_if_args = Config.now_if_args
 
 now_if_args(function()
     -- Define hook to update tree-sitter parsers after plugin is updated

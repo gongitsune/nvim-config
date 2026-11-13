@@ -4,8 +4,11 @@ vim.g.mapleader = " " -- Use '<Space>' as <Leader> key
 vim.o.mouse = "a" -- Enable mouse
 vim.o.undofile = true -- Enable persistent undo
 vim.o.shada = "'100,<50,s10,:1000,/100,@100,h"
+vim.o.clipboard = "unnamedplus"
 
 -- UI
+vim.o.cmdheight = 0
+vim.o.laststatus = 3
 vim.o.breakindent = true -- Indent wrapped lines to match line start
 vim.o.breakindentopt = "list:-1" -- Add padding for lists (if 'wrap' is set)
 vim.o.colorcolumn = "+1" -- Draw column on the right of maximum width
@@ -39,6 +42,7 @@ vim.o.foldnestmax = 10 -- Limit number of fold levels
 vim.o.foldtext = "" -- Show text under fold with its highlighting
 
 -- Editing ====================================================================
+vim.o.preserveindent = true
 vim.o.autoindent = true -- Use auto indent
 vim.o.expandtab = true -- Convert tabs to spaces
 vim.o.formatoptions = "rqnl1j" -- Improve comment editing
