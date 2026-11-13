@@ -6,8 +6,6 @@ Config.leader_group_clues = {
   { mode = 'n', keys = '<Leader>l', desc = '+Language' },
   { mode = 'n', keys = '<Leader>o', desc = '+Other' },
   { mode = 'n', keys = '<Leader>s', desc = '+Session' },
-  { mode = 'n', keys = '<Leader>t', desc = '+Terminal' },
-  { mode = 'n', keys = '<Leader>v', desc = '+Visits' },
 
   { mode = 'x', keys = '<Leader>g', desc = '+Git' },
   { mode = 'x', keys = '<Leader>l', desc = '+Language' },}
@@ -57,26 +55,9 @@ nmap_leader('fr',       '<Cmd>Pick resume<CR>',                      'Resume')
 nmap_leader('fR',       '<Cmd>Pick lsp scope="references"<CR>',      'References (LSP)')
 nmap_leader('fs',       pick_workspace_symbols_live,                 'Symbols workspace (live)')
 nmap_leader('fS',       '<Cmd>Pick lsp scope="document_symbol"<CR>', 'Symbols document')
-nmap_leader('fv',       '<Cmd>Pick visit_paths cwd=""<CR>',          'Visit paths (all)')
-nmap_leader('fV',       '<Cmd>Pick visit_paths<CR>',                 'Visit paths (cwd)')
 
 -- g is for 'Git'. Common usage:
-local git_log_cmd = [[Git log --pretty=format:\%h\ \%as\ │\ \%s --topo-order]]
-local git_log_buf_cmd = git_log_cmd .. ' --follow -- %'
-
 nmap_leader('gg', '<Cmd>terminal lazygit<CR>a',             'Added diff')
-nmap_leader('ga', '<Cmd>Git diff --cached<CR>',             'Added diff')
-nmap_leader('gA', '<Cmd>Git diff --cached -- %<CR>',        'Added diff buffer')
-nmap_leader('gc', '<Cmd>Git commit<CR>',                    'Commit')
-nmap_leader('gC', '<Cmd>Git commit --amend<CR>',            'Commit amend')
-nmap_leader('gd', '<Cmd>Git diff<CR>',                      'Diff')
-nmap_leader('gD', '<Cmd>Git diff -- %<CR>',                 'Diff buffer')
-nmap_leader('gl', '<Cmd>' .. git_log_cmd .. '<CR>',         'Log')
-nmap_leader('gL', '<Cmd>' .. git_log_buf_cmd .. '<CR>',     'Log buffer')
-nmap_leader('go', '<Cmd>lua MiniDiff.toggle_overlay()<CR>', 'Toggle overlay')
-nmap_leader('gs', '<Cmd>lua MiniGit.show_at_cursor()<CR>',  'Show at cursor')
-
-xmap_leader('gs', '<Cmd>lua MiniGit.show_at_cursor()<CR>', 'Show at selection')
 
 vim.api.nvim_create_autocmd('TermClose', {
   pattern = '*lazygit*',
@@ -116,24 +97,3 @@ nmap_leader('sn', '<Cmd>lua ' .. session_new .. '<CR>',         'New')
 nmap_leader('sr', '<Cmd>lua MiniSessions.select("read")<CR>',   'Read')
 nmap_leader('sR', '<Cmd>lua MiniSessions.restart()<CR>',        'Restart')
 nmap_leader('sw', '<Cmd>lua MiniSessions.write()<CR>',          'Write current')
-
--- t is for 'Terminal'
-nmap_leader('tt', '<Cmd>horizontal term<CR>a', 'Terminal (horizontal)')
-nmap_leader('tT', '<Cmd>vertical term<CR>a',   'Terminal (vertical)')
-
--- v is for 'Visits'. Common usage:
-local make_pick_core = function(cwd, desc)
-  return function()
-    local sort_latest = MiniVisits.gen_sort.default({ recency_weight = 1 })
-    local local_opts = { cwd = cwd, filter = 'core', sort = sort_latest }
-    MiniExtra.pickers.visit_paths(local_opts, { source = { name = desc } })
-  end
-end
-
-nmap_leader('vc', make_pick_core('',  'Core visits (all)'),       'Core visits (all)')
-nmap_leader('vC', make_pick_core(nil, 'Core visits (cwd)'),       'Core visits (cwd)')
-nmap_leader('vv', '<Cmd>lua MiniVisits.add_label("core")<CR>',    'Add "core" label')
-nmap_leader('vV', '<Cmd>lua MiniVisits.remove_label("core")<CR>', 'Remove "core" label')
-nmap_leader('vl', '<Cmd>lua MiniVisits.add_label()<CR>',          'Add label')
-nmap_leader('vL', '<Cmd>lua MiniVisits.remove_label()<CR>',       'Remove label')
--- stylua: ignore end

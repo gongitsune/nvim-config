@@ -60,7 +60,6 @@ later(function()
   require('mini.bracketed').setup()
   require('mini.cmdline').setup()
   require('mini.comment').setup()
-  require('mini.git').setup()
 
   local hipatterns = require('mini.hipatterns')
   local hi_words = MiniExtra.gen_highlighter.words
@@ -85,5 +84,4 @@ later(function()
 
   require('mini.pairs').setup({ modes = { command = true } })
   require('mini.surround').setup()
-  require('mini.visits').setup()
 end)
