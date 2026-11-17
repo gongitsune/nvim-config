@@ -53,6 +53,10 @@ now_if_args(function()
         "clangd",
         "basedpyright",
         "ruff",
+        "vhdl_ls",
+        "speja",
+        "tsc",
+        "oxlint",
     })
 
     -- Configure conform for code format
@@ -65,6 +69,7 @@ now_if_args(function()
             lua = { "stylua" },
             cpp = { "clang-format" },
             c = { "clang-format" },
+            typescript = { "oxfmt" },
         },
     })
     Config.new_autocmd("BufWritePre", "*", function(args)
