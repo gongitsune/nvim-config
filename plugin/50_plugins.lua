@@ -51,6 +51,8 @@ now_if_args(function()
     vim.lsp.enable({
         "lua_ls",
         "clangd",
+        "basedpyright",
+        "ruff",
     })
 
     -- Configure conform for code format

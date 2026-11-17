@@ -8,7 +8,15 @@ now(function()
     require("mini.icons").setup({})
     later(MiniIcons.tweak_lsp_kind)
 
-    require("mini.notify").setup()
+    require("mini.notify").setup({
+        content = {
+            sort = function(notifications)
+                return vim.tbl_filter(function(notif)
+                    return not (notif.data.source == "lsp_progress" and notif.data.client_name == "basedpyright")
+                end, notifications)
+            end,
+        },
+    })
     require("mini.sessions").setup()
     require("mini.starter").setup()
     require("mini.statuscolumn").setup()
