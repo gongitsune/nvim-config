@@ -1,5 +1,3 @@
-local misc = require("mini.misc")
-
 local now, later, now_if_args = Config.now, Config.later, Config.now_if_args
 
 now(function()
@@ -12,7 +10,7 @@ now(function()
         content = {
             sort = function(notifications)
                 return vim.tbl_filter(function(notif)
-                    return not (notif.data.source == "lsp_progress" and notif.data.client_name == "basedpyright")
+                    return not (notif.data.source == "lsp_progress" and notif.data.client_name == "pyright")
                 end, notifications)
             end,
         },
