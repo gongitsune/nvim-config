@@ -22,8 +22,11 @@ end
 -- general keymaps
 nmap_leader("w", "<Cmd>w<CR>", "Write")
 nmap_leader("q", "<Cmd>q<CR>", "Quit")
-nmap_leader("r", "<Cmd>restart<CR>", "Restart")
 nmap_leader("t", "<Cmd>terminal<CR>", "Terminal")
+
+-- overseer
+nmap_leader("r", "<Cmd>OverseerRun<CR>", "Run task")
+nmap_leader("R", "<Cmd>OverseerToggle<CR>", "Toggle task")
 
 vim.keymap.set("n", "<Esc>", "<Cmd>noh<Cr>", { desc = "Clear hilight" })
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left split" })

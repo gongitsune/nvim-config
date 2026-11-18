@@ -1,5 +1,5 @@
 local add = vim.pack.add
-local now_if_args = Config.now_if_args
+local now_if_args, later = Config.now_if_args, Config.later
 
 now_if_args(function()
     -- Define hook to update tree-sitter parsers after plugin is updated
@@ -17,7 +17,6 @@ now_if_args(function()
         "https://github.com/saghen/blink.cmp",
         "https://github.com/zbirenbaum/copilot.lua",
         "https://github.com/copilotlsp-nvim/copilot-lsp",
-        "https://github.com/lewis6991/gitsigns.nvim",
         "https://github.com/saghen/blink.indent",
     })
 
@@ -57,6 +56,7 @@ now_if_args(function()
         "speja",
         "tsc",
         "oxlint",
+        "jsonls",
     })
 
     -- Configure conform for code format
@@ -95,7 +95,17 @@ now_if_args(function()
             auto_trigger = true,
         },
     })
+end)
+
+later(function()
+    add({
+        "https://github.com/lewis6991/gitsigns.nvim",
+        "https://github.com/stevearc/overseer.nvim",
+    })
 
     -- Gitsigns setup
     require("gitsigns").setup()
+
+    -- Overseer setup
+    require("overseer").setup()
 end)
